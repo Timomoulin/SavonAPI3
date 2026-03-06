@@ -1,0 +1,19 @@
+@startuml
+start
+:Recevoir une requête HTTP PUT avec :
+- ID en tant que paramètre de l'URL;
+- Un objet RecetteFormDTO dans le corps;
+
+:Assigner l'ID de l'URL au champ ID du DTO;
+note right: Assure que le DTO correspond à\nla recette identifiée par l'ID de l'URL.
+
+:savedRecette= simulateurService.toRecette(recetteFormDTO);
+note right: Convertit le DTO en une entité Recette.\nMet à jour la recette si elle existe,\nsinon en crée une nouvelle.
+
+:Créer une réponse HTTP avec :
+- Statut 201 (Created);
+- Corps contenant la recette sauvegardée;
+
+:Retourner la réponse HTTP;
+stop
+@enduml

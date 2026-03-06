@@ -1,0 +1,26 @@
+@startuml
+start
+:Recevoir l'objet Recette;
+
+:variable caracteristiques = caracteristiqueDAO.findAll();
+if (Des caractéristiques trouvées ?) then (Oui)
+    :Récupérer la liste des caractéristiques;
+else (Non)
+    : Retourne une liste de résultats vide;
+    stop
+endif
+
+:Créer une liste mutable vide pour les résultats;
+
+repeat
+:Pour chaque caractéristique (c) dans la liste;
+:Créer un ID de résultat:
+resultatId = ResultatId(c.id, recette.id);
+
+:Créer un objet Resultat avec le resultatId et un score de 0;
+:Ajouter le résultat à la liste;
+repeat while (Il reste des caractéristiques ?)
+
+:Retourner la liste des résultats;
+stop
+@enduml

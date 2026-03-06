@@ -1,0 +1,14 @@
+@startuml
+start
+:Recevoir une requête HTTP POST avec un objet RecetteFormDTO;
+
+:savedRecette = simulateurService.toRecette(recetteFormDTO);
+note right: Convertit le DTO en une entité Recette\net la sauvegarde dans la base de données.
+
+:Créer une réponse HTTP avec :
+- Statut 201 (Created);
+- Corps contenant la recette sauvegardée;
+
+:Retourner la réponse HTTP;
+stop
+@enduml

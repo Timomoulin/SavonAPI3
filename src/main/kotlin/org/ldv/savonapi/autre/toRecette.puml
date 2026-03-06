@@ -1,0 +1,41 @@
+@startuml
+start
+:Recevoir un objet RecetteFormDTO;
+
+:Créer une variable recette (une entité Recette) à partir du DTO;
+:Sauvegarder la recette (this.recetteDAO.save(recette));
+
+repeat
+:Pour chaque ligneDTO dans recetteFormDTO.ligneIngredients;
+
+:Convertir la ligne DTO en LigneIngredient
+(ligne = this.toLigne(ligneDTO));
+:Ajouter la ligne à recette.ligneIngredients;
+
+repeat while (Il reste des lignes ?)
+
+:Créer les résultats associés à la recette
+(resultats = this.createResultats(recette));
+:Ajouter les résultats à recette.resultats;
+
+:Effectuer les calculs
+- calculPondere()
+- calculNonPondere()
+- calculQteAlcalin()
+- calculApportEau();
+
+:Sauvegarder les lignes d'ingrédients
+(this.ligneIngredientDAO.saveAll(recette.lignes));
+
+:Assigner les mentions aux résultats
+(recette = this.assignMentionsToResults(recette));
+
+:Sauvegarder les résultats
+(this.resultatDAO.saveAll(recette.resultats));
+
+:Mettre à jour et sauvegarder la recette
+(this.recetteDAO.save(recette));
+
+:Retourner la recette mise à jour;
+stop
+@enduml

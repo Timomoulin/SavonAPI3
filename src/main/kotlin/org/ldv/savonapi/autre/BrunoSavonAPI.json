@@ -1,0 +1,221 @@
+{
+  "name": "SavonAPI",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Get All Savon",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon Deficit",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant Reduction\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 0.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon Exès",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": -5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update savon",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "PUT",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": 1,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Show Savon",
+      "seq": 6,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Savon",
+      "seq": 7,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "DELETE",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    }
+  ],
+  "environments": []
+}

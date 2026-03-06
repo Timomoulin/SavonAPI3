@@ -1,0 +1,29 @@
+@startuml
+start
+:Recevoir l'objet Recette;
+
+repeat
+:Pour chaque résultat dans recette.resultats;
+
+if (Le résultat a une caractéristique ?) then (Oui)
+    :Récupérer la caractéristique;
+
+    :Appeler mentionDAO.findMentionByScoreAndCaracteristique(
+        score = resultat.score,
+        caracteristique = resultat.caracteristique
+    );
+
+    if (Une mention correspondante est trouvée ?) then (Oui)
+        :Associer la mention au résultat;
+    else (Non)
+        :Afficher un message d'alerte
+        ("Aucune mention trouvée pour le score et la caractéristique");
+    endif
+else (Non)
+    :Ignorer ce résultat;
+endif
+repeat while (Il reste des résultats ?)
+
+:Retourner la recette mise à jour;
+stop
+@enduml

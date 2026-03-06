@@ -1,0 +1,24 @@
+@startuml
+start
+
+:Initialiser qteAlcalinNormal à 0.0;
+
+if (avecSoude) then (Oui)
+    :Calculer qteAlcalinNormal =
+    somme des (quantite * sapo  * (40.0 / 56 / 1000));
+else (Non)
+    :Calculer qteAlcalinNormal =
+    somme des ((quantite  * sapo ) / 1000.0);
+endif
+
+:Calculer qteAlcalin =
+qteAlcalinNormal / (concentrationAlcalin / 100);
+
+:Réduire qteAlcalin par le surgraissage:
+qteAlcalin = qteAlcalin - (qteAlcalin * (surgraissage / 100));
+
+:Assigner qteAlcalin à this.qteAlcalin
+en tant que Float;
+
+stop
+@enduml

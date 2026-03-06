@@ -1,0 +1,22 @@
+@startuml
+start
+:Recevoir le DTO LigneIngredientDTO
+et l'objet Recette;
+
+: variable ingredient = ingredientDAO.findById(ligneIngredientDTO.ingredientId);
+if (ingredient trouvé ?) then (Oui)
+    :Récupérer l'ingrédient (ingredient.get());
+else (Non)
+    :Lancer une exception (NoSuchElementException);
+    stop
+endif
+
+:Créer une instance de LigneIngredientId;
+
+
+:Créer une instance LigneIngredient;
+
+
+:Retourner l'objet LigneIngredient;
+stop
+@enduml

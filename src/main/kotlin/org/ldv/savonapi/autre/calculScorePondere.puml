@@ -1,0 +1,73 @@
+@startuml
+start
+
+:Initialiser les scores de base
+set douceur = somme des (ingredient.douceur * pourcentage / 100)
+set lavant = somme des (ingredient.lavant * pourcentage / 100)
+set volMousse = somme des (ingredient.volMousse * pourcentage / 100)
+set tenueMousse = somme des (ingredient.tenueMousse * pourcentage / 100)
+set durete = somme des (ingredient.durete * pourcentage / 100)
+set solubilite = somme des (ingredient.solubilite * pourcentage / 100)
+set sechage = somme des (ingredient.sechage * pourcentage / 100);
+
+:Modifier les scores avec le surgraissage
+douceur = douceur * (1 + 0.01494 * surgraissage)
+lavant = lavant * (1 + -0.01203 * surgraissage)
+volMousse = volMousse * (1 + -0.00702 * surgraissage)
+tenueMousse = tenueMousse * (1 + 0.01016 * surgraissage)
+durete = durete * (1 + -0.00602 * surgraissage)
+solubilite = solubilite * (1 + 0.00250 * surgraissage)
+sechage = sechage * (1 + -0.00503 * surgraissage);
+
+:Affecter les scores aux résultats;
+if (Résultat "Douceur" trouvé ?) then (Oui)
+    :Affecter douceur au résultat "Douceur";
+else (Non)
+    :Erreur : Résultat "Douceur" introuvable;
+    stop
+endif
+
+if (Résultat "Lavant" trouvé ?) then (Oui)
+    :Affecter lavant au résultat "Lavant";
+else (Non)
+    :Erreur : Résultat "Lavant" introuvable;
+    stop
+endif
+
+if (Résultat "Volume de mousse" trouvé ?) then (Oui)
+    :Affecter volMousse au résultat "Volume de mousse";
+else (Non)
+    :Erreur : Résultat "Volume de mousse" introuvable;
+    stop
+endif
+
+if (Résultat "Tenue de mousse" trouvé ?) then (Oui)
+    :Affecter tenueMousse au résultat "Tenue de mousse";
+else (Non)
+    :Erreur : Résultat "Tenue de mousse" introuvable;
+    stop
+endif
+
+if (Résultat "Dureté" trouvé ?) then (Oui)
+    :Affecter durete au résultat "Dureté";
+else (Non)
+    :Erreur : Résultat "Dureté" introuvable;
+    stop
+endif
+
+if (Résultat "Solubilité" trouvé ?) then (Oui)
+    :Affecter solubilite au résultat "Solubilité";
+else (Non)
+    :Erreur : Résultat "Solubilité" introuvable;
+    stop
+endif
+
+if (Résultat "Séchage" trouvé ?) then (Oui)
+    :Affecter sechage au résultat "Séchage";
+else (Non)
+    :Erreur : Résultat "Séchage" introuvable;
+    stop
+endif
+
+stop
+@enduml

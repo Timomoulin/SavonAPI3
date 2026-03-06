@@ -1,0 +1,11 @@
+@startuml
+start
+:Obtenir la concentration en eau
+concentrationEau = (100 - concentrationAlcalin) / 100;
+
+:Calculer l'apport en eau
+apportEau = qteAlcalin * concentrationEau;
+
+:Assigner apportEau à this.apportEau;
+stop
+@enduml

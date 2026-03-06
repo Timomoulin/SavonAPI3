@@ -1,0 +1,27 @@
+@startuml
+start
+
+:Initialiser la variable 'ins' pour le score INS
+set ins = somme des (ingredient.INS * pourcentage / 100);
+
+:Initialiser la variable 'iode' pour le score Iode
+set iode = somme des (ingredient.Iode * pourcentage / 100);
+
+:Rechercher le résultat pour la caractéristique "Iode";
+if (Résultat trouvé ?) then (Oui)
+    :Affecter le score 'iode' au résultat de "Iode";
+else (Non)
+    :Erreur : Résultat "Iode" introuvable;
+    stop
+endif
+
+:Rechercher le résultat pour la caractéristique "Indice INS";
+if (Résultat trouvé ?) then (Oui)
+    :Affecter le score 'ins' au résultat de "Indice INS";
+else (Non)
+    :Erreur : Résultat "Indice INS" introuvable;
+    stop
+endif
+
+stop
+@enduml
