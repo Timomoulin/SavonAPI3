@@ -15,6 +15,7 @@ class Role (
     @Column(nullable = false)
     var id: Long? = null,
     var nom: String,
+    var nomLogic: String,
     @OneToMany(mappedBy = "role", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     open var utilisateurs: MutableSet<Utilisateur> = mutableSetOf()
 ) {

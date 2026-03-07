@@ -15,7 +15,9 @@ import java.time.LocalDateTime
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     open var id: Long? = null,
+    @Column(unique = true)
     open var username: String,
+    @Column(unique = true)
     open var email: String,
     open var password: String,
     var estBanned: Boolean = false,
