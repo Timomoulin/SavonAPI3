@@ -3,10 +3,21 @@ import org.ldv.savonapi.model.dao.*
 import org.ldv.savonapi.model.entity.*
 import org.ldv.savonapi.model.id.ResultatId
 import org.springframework.boot.CommandLineRunner
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 @Component
-class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO: CaracteristiqueDAO,val mentionDAO: MentionDAO,val recetteDAO: RecetteDAO,val resultatDAO: ResultatDAO) : CommandLineRunner {
+class DataInitializer (
+    val ingredientDAO: IngredientDAO,
+    val caracteristiqueDAO: CaracteristiqueDAO,
+    val mentionDAO: MentionDAO,
+    val recetteDAO: RecetteDAO,
+    val resultatDAO: ResultatDAO,
+    private val roleDAO: RoleDAO,
+    private val utilisateurDAO: UtilisateurDAO,
+    private val passwordEncoder: PasswordEncoder
+) : CommandLineRunner {
+
     override fun run(vararg args: String?) {
         //Pour importer les ingredients
         if (ingredientDAO.count() == 0L) { // Éviter les doublons
@@ -211,7 +222,16 @@ class DataInitializer (val ingredientDAO: IngredientDAO, val caracteristiqueDAO:
 
             resultatDAO.saveAll(resultatsRecette1 + resultatsRecette2)
         }
-
+if (roleDAO.count() == 0L) {
+    val roleAdmin = Role(id = 1, nom = "admin", nomLogic = "ROLE_ADMIN")
+    val roleUser = Role(id = 2, nom = "utilisateur", nomLogic = "ROLE_UTILISATEUR")
+    roleDAO.saveAll(listOf(roleAdmin, roleUser))
+}
+        if (utilisateurDAO.count() == 0L) {
+            val admin = Utilisateur(username = "Nimda", email = "admin@email.com", password = passwordEncoder.encode("admin@email.com1"), role = roleDAO.findById(1).orElseThrow())
+            val user = Utilisateur(username = "Ruetasilitu", email = "utilisateur@email.com", password = passwordEncoder.encode("utilisateur@email.com1"), role = roleDAO.findById(2).orElseThrow())
+            utilisateurDAO.saveAll(listOf(admin, user))
+        }
 
         }
 

@@ -1,0 +1,655 @@
+{
+  "name": "SavonAPI",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Ajout commentaire",
+      "seq": 15,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/commentaire",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"id\":null,\n  \"texte\":\"Super recette !!\",\n\"idRecette\":1\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Ajout mot clés",
+      "seq": 11,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/2?idMot=1",
+        "method": "PATCH",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "idMot:1",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": [
+          {
+            "name": "idMot",
+            "value": "1",
+            "enabled": true
+          }
+        ]
+      }
+    },
+    {
+      "type": "http",
+      "name": "avg recette carac",
+      "seq": 18,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/avg/Douceur",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "compte ingredient",
+      "seq": 9,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/ingredient/count",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Count Recette",
+      "seq": 12,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/count",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Delete Savon",
+      "seq": 7,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "DELETE",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Get All Savon",
+      "seq": 1,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "ingredient aléatoire",
+      "seq": 16,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/ingredient/alea",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "ingredient par nom",
+      "seq": 10,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/ingredient/nom/Coco",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Inscription Utilisateur",
+      "seq": 14,
+      "request": {
+        "url": "http://localhost:8080/api-savon/register",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"id\":null,\n  \"nom\":\"Moulin\",\n  \"prenom\":\"Timothée\",\n  \"email\":\"admin@email.com\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Post ingredient",
+      "seq": 8,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/ingredient",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"nom\": \"Huile de lin \",\n  \"iode\": 80,\n  \"ins\": 110,\n  \"sapo\": 189,\n  \"volMousse\": 10,\n  \"tenueMousse\": 9,\n  \"douceur\": 9,\n  \"lavant\": 10,\n  \"durete\": 10,\n  \"solubilite\": 9,\n  \"sechage\": 10,\n  \"estCorpsGras\": true\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "recherche de recette par ingredient",
+      "seq": 13,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/rechercheIngredient",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "  {\n    \"id\": 1,\n    \"nom\": \"Coco\",\n    \"iode\": 9,\n    \"ins\": 248,\n    \"sapo\": 257,\n    \"volMousse\": 13.326,\n    \"tenueMousse\": 9.56,\n    \"douceur\": 7.746,\n    \"lavant\": 14.462,\n    \"durete\": 9.39,\n    \"solubilite\": 11.204,\n    \"sechage\": 11.88,\n    \"estCorpsGras\": true\n  }",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Show Savon",
+      "seq": 6,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "GET",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon Deficit",
+      "seq": 2,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant Reduction 2\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 250.0,\n            \"pourcentage\": 25.0,\n            \"ingredientId\":2\n        },\n        {\n            \"ingredientId\":1,\n            \"quantite\": 750.0,\n            \"pourcentage\": 75.0\n          \n        }\n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon Exès",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 50,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 99.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Store Savon",
+      "seq": 3,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 0.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        }\n  \n    ]\n}\n",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Sup Utilisateur",
+      "seq": 17,
+      "request": {
+        "url": "http://localhost:8080/api-savon/utilisateur/1",
+        "method": "DELETE",
+        "headers": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Update savon",
+      "seq": 5,
+      "request": {
+        "url": "http://localhost:8080/api-savon/v1/recette/1",
+        "method": "PUT",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n    \"id\": 1,\n    \"tite\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login Admin",
+      "seq": 19,
+      "request": {
+        "url": "http://localhost:8080/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"identifier\":\"admin@email.com\",\n  \"password\":\"admin@email.com1\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login Utilisater",
+      "seq": 20,
+      "request": {
+        "url": "http://localhost:8080/auth/register",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"username\":\"J.Doe\",\n  \"email\":\"jondoe@email.com\",\n  \"password\":\"test123T€st\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Inscription",
+      "seq": 21,
+      "request": {
+        "url": "http://localhost:8080/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"identifier\":\"Ruetasilitu\",\n  \"password\":\"utilisateur@email.com1\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    }
+  ],
+  "environments": []
+}
