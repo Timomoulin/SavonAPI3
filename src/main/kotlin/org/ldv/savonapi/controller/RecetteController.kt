@@ -56,6 +56,7 @@ val utilisateur = utilisateurDAO.findByUsername(authentication.name)
      * @return Une réponse HTTP contenant la recette si elle existe,
      * ou un statut 404 si aucune recette n'est trouvée.
      */
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
     @GetMapping("/{id}")
     fun show(@PathVariable id: Long): ResponseEntity<Recette> {
         val recette = this.recetteDAO.findById(id)
