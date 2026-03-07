@@ -2,10 +2,14 @@ package org.ldv.savonapi.controller
 
 import org.ldv.savonapi.dto.RecetteFormDTO
 import org.ldv.savonapi.model.dao.RecetteDAO
+import org.ldv.savonapi.model.dao.UtilisateurDAO
 import org.ldv.savonapi.model.entity.Recette
+import org.ldv.savonapi.model.entity.Utilisateur
 import org.ldv.savonapi.service.SimulateurService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 import java.util.Optional
 
@@ -21,6 +25,7 @@ import java.util.Optional
 @RequestMapping("/api-savon/v1/recette")
 class RecetteController(
     val simulateurService: SimulateurService,
+    val utilisateurDAO: UtilisateurDAO,
     val recetteDAO: RecetteDAO
 ) {
 
@@ -57,9 +62,11 @@ class RecetteController(
      * @param recetteFormDTO Un objet `RecetteFormDTO` contenant les données de la recette à créer.
      * @return Une réponse HTTP avec la recette nouvellement créée et un statut HTTP 201 (Created).
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping
-    fun store(@RequestBody recetteFormDTO: RecetteFormDTO): ResponseEntity<Recette> {
-        val savedRecette = this.simulateurService.toRecette(recetteFormDTO)
+    fun store(@RequestBody recetteFormDTO: RecetteFormDTO,authentication: Authentication): ResponseEntity<Recette> {
+        val utilisateur = utilisateurDAO.findByUsername(authentication.name)
+        val savedRecette = this.simulateurService.toRecette(recetteFormDTO,utilisateur)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRecette)
     }
 
@@ -73,6 +80,7 @@ class RecetteController(
      * @param recetteFormDTO Un objet `RecetteFormDTO` contenant les nouvelles données de la recette.
      * @return Une réponse HTTP avec la recette mise à jour et un statut HTTP 201 (Created).
      */
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
     @PutMapping("/{id}")
     fun store(@PathVariable id: Long, @RequestBody recetteFormDTO: RecetteFormDTO): ResponseEntity<Recette> {
         recetteFormDTO.id = id
@@ -88,8 +96,10 @@ class RecetteController(
      * - `204 No Content` si la suppression a été effectuée avec succès.
      * - `404 Not Found` si aucune recette avec l'ID spécifié n'existe.
      */
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long): ResponseEntity<Void> {
+    fun delete(@PathVariable id: Long,authentication: Authentication): ResponseEntity<Void> {
+
         return if (recetteDAO.existsById(id)) {
             recetteDAO.deleteById(id)
             ResponseEntity.noContent().build()

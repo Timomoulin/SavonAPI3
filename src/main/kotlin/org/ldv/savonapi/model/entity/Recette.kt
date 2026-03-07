@@ -16,7 +16,9 @@ class Recette(
     var avecSoude: Boolean,
     var concentrationAlcalin: Float,
     var qteAlcalin: Float,
-
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_id")
+    open var utilisateur: Utilisateur? = null,
 
     @OneToMany(mappedBy = "recette", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     var ligneIngredients: MutableList<LigneIngredient> = mutableListOf(),
@@ -25,6 +27,9 @@ class Recette(
 
 ) {
     var dateCreation: LocalDateTime = LocalDateTime.now()
+
+
+
     /**
      * Calcule les scores non pondérés pour les caractéristiques INS et Iode, en fonction des ingrédients de la recette.
      *

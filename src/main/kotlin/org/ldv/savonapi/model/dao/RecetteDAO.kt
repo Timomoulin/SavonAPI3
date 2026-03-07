@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 
 interface RecetteDAO : JpaRepository<Recette, Long> {
+
+
+    fun findByUtilisateur_Username(username: String): List<Recette>
+
 }

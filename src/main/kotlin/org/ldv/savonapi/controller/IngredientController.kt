@@ -1,10 +1,13 @@
 package org.ldv.savonapi.controller
 
 import org.ldv.savonapi.model.dao.IngredientDAO
+import org.ldv.savonapi.model.dao.RecetteDAO
 import org.ldv.savonapi.model.entity.Ingredient
 import org.ldv.savonapi.model.entity.Recette
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.Authentication
 import org.springframework.web.bind.annotation.*
 
 /**
@@ -15,16 +18,24 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @CrossOrigin
 @RequestMapping("/api-savon/v1/ingredient")
-class IngredientController (val ingredientDAO: IngredientDAO) {
+class IngredientController (val ingredientDAO: IngredientDAO, private val recetteDAO: RecetteDAO) {
 
     /**
      * Récupère la liste de tous les ingrédients disponibles.
      *
      * @return Liste d'ingrédients.
      */
-    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
     fun index(): List<Ingredient> {
         return this.ingredientDAO.findAll()
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    fun mesRecettes(authentication: Authentication): List<Recette> {
+
+        return recetteDAO.findByUtilisateur_Username(authentication.name)
     }
 
     /**
@@ -33,6 +44,7 @@ class IngredientController (val ingredientDAO: IngredientDAO) {
      * @param id Identifiant de l'ingrédient.
      * @return L'ingrédient s'il est trouvé, sinon retourne `404 Not Found`.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     fun show(@PathVariable id: Long): ResponseEntity<Ingredient> {
         val ingredient = ingredientDAO.findById(id)
@@ -49,6 +61,7 @@ class IngredientController (val ingredientDAO: IngredientDAO) {
      * @param ingredient L'ingrédient à enregistrer (données envoyées en JSON).
      * @return L'ingrédient créé avec un code HTTP 201 Created.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     fun store(@RequestBody ingredient: Ingredient): ResponseEntity<Ingredient> {
         val savedIngredient = ingredientDAO.save(ingredient)
@@ -62,6 +75,7 @@ class IngredientController (val ingredientDAO: IngredientDAO) {
      * @param updatedIngredient Nouvelles valeurs de l'ingrédient.
      * @return L'ingrédient mis à jour ou un code 404 si l'ingrédient n'existe pas.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     fun store(
         @PathVariable id: Long,
@@ -92,6 +106,7 @@ class IngredientController (val ingredientDAO: IngredientDAO) {
      * @param id Identifiant de l'ingrédient à supprimer.
      * @return Code HTTP 204 No Content si la suppression réussit, sinon 404 Not Found.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
         return if (ingredientDAO.existsById(id)) {
@@ -107,6 +122,7 @@ class IngredientController (val ingredientDAO: IngredientDAO) {
      *
      * @return Code HTTP 204 No Content si la suppression réussit.
      */
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/all")
     fun deleteAll(): ResponseEntity<Void> {
         ingredientDAO.deleteAll()

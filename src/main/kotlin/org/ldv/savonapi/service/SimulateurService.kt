@@ -6,6 +6,7 @@ import org.ldv.savonapi.model.dao.*
 import org.ldv.savonapi.model.entity.LigneIngredient
 import org.ldv.savonapi.model.entity.Recette
 import org.ldv.savonapi.model.entity.Resultat
+import org.ldv.savonapi.model.entity.Utilisateur
 import org.ldv.savonapi.model.id.LigneIngredientId
 import org.ldv.savonapi.model.id.ResultatId
 import org.springframework.stereotype.Service
@@ -36,7 +37,7 @@ class SimulateurService(
      * @param recetteFormDTO DTO contenant les informations de la recette.
      * @return La recette sauvegardée avec ses lignes d'ingrédients et résultats associés.
      */
-    fun toRecette(recetteFormDTO: RecetteFormDTO): Recette {
+    fun toRecette(recetteFormDTO: RecetteFormDTO,utilisateur: Utilisateur?=null): Recette {
         var recette = Recette(
             recetteFormDTO.id,
             recetteFormDTO.titre,
@@ -46,6 +47,7 @@ class SimulateurService(
             recetteFormDTO.avecSoude,
             recetteFormDTO.concentrationAlcalin,
             0f,
+            utilisateur=utilisateur
 
         )
         recette = recetteDAO.save(recette)
@@ -134,4 +136,12 @@ class SimulateurService(
     }
 
 
+    fun appartenir(recetteId: Long, username: String): Boolean {
+
+        val recette = recetteDAO.findById(recetteId)
+
+        if (recette.isEmpty) return false
+
+        return recette.get().utilisateur?.username == username
+    }
 }
