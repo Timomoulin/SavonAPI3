@@ -1,5 +1,6 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
@@ -16,6 +17,7 @@ class Recette(
     var avecSoude: Boolean,
     var concentrationAlcalin: Float,
     var qteAlcalin: Float,
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")
     open var utilisateur: Utilisateur? = null,

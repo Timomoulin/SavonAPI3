@@ -34,9 +34,19 @@ class RecetteController(
      *
      * @return Une liste de toutes les recettes existantes.
      */
-    @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
     fun index(): List<Recette> {
         return this.recetteDAO.findAll()
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    fun mesRecettes(authentication: Authentication): List<Recette> {
+val utilisateur = utilisateurDAO.findByUsername(authentication.name)
+        if(utilisateur==null) throw RuntimeException()
+        val savons = utilisateur.recettes
+        return savons
     }
 
     /**

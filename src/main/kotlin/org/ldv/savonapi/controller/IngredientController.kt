@@ -25,18 +25,13 @@ class IngredientController (val ingredientDAO: IngredientDAO, private val recett
      *
      * @return Liste d'ingrédients.
      */
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/all")
+
+    @GetMapping
     fun index(): List<Ingredient> {
         return this.ingredientDAO.findAll()
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping
-    fun mesRecettes(authentication: Authentication): List<Recette> {
 
-        return recetteDAO.findByUtilisateur_Username(authentication.name)
-    }
 
     /**
      * Récupère un ingrédient spécifique par son ID.
