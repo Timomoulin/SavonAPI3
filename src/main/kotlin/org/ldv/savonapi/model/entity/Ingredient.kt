@@ -3,6 +3,7 @@ package org.ldv.savonapi.model.entity
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 class Ingredient(
@@ -27,5 +28,6 @@ class Ingredient(
     var ligneIngredients: MutableList<LigneIngredient> = mutableListOf()
 
 ) {
+    var dateCreation: LocalDateTime = LocalDateTime.now()
 
 }

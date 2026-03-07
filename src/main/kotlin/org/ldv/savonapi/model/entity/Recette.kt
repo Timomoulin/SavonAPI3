@@ -1,6 +1,7 @@
 package org.ldv.savonapi.model.entity
 
 import jakarta.persistence.*
+import java.time.LocalDateTime
 
 @Entity
 class Recette(
@@ -23,6 +24,7 @@ class Recette(
     var resultats: MutableList<Resultat> = mutableListOf()
 
 ) {
+    var dateCreation: LocalDateTime = LocalDateTime.now()
     /**
      * Calcule les scores non pondérés pour les caractéristiques INS et Iode, en fonction des ingrédients de la recette.
      *
