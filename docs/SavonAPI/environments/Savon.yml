@@ -1,0 +1,4 @@
+name: Savon
+variables:
+  - name: Bearer
+    value: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzMwNDg4NTgsImV4cCI6MTc3MzA1MjQ1OH0.Ec5LbRecw9AWogY1VrZZYZrEgwvaVw9enQzBk8APrTc

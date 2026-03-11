@@ -1,0 +1,32 @@
+info:
+  name: recherche de recette par ingredient
+  type: http
+  seq: 13
+
+http:
+  method: GET
+  url: http://localhost:8080/api-savon/v1/recette/rechercheIngredient
+  body:
+    type: json
+    data: |2-
+        {
+          "id": 1,
+          "nom": "Coco",
+          "iode": 9,
+          "ins": 248,
+          "sapo": 257,
+          "volMousse": 13.326,
+          "tenueMousse": 9.56,
+          "douceur": 7.746,
+          "lavant": 14.462,
+          "durete": 9.39,
+          "solubilite": 11.204,
+          "sechage": 11.88,
+          "estCorpsGras": true
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

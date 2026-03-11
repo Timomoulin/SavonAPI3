@@ -1,0 +1,31 @@
+info:
+  name: Post ingredient
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: http://localhost:8080/api-savon/v1/ingredient
+  body:
+    type: json
+    data: |-
+      {
+        "nom": "Huile de lin ",
+        "iode": 80,
+        "ins": 110,
+        "sapo": 189,
+        "volMousse": 10,
+        "tenueMousse": 9,
+        "douceur": 9,
+        "lavant": 10,
+        "durete": 10,
+        "solubilite": 9,
+        "sechage": 10,
+        "estCorpsGras": true
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

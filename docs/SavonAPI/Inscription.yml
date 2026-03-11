@@ -1,0 +1,21 @@
+info:
+  name: Inscription
+  type: http
+  seq: 21
+
+http:
+  method: POST
+  url: http://localhost:8080/auth/login
+  body:
+    type: json
+    data: |-
+      {
+        "identifier":"Ruetasilitu",
+        "password":"utilisateur@email.com1"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

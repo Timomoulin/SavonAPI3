@@ -1,0 +1,39 @@
+info:
+  name: Store Savon Deficit
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/api-savon/v1/recette
+  body:
+    type: json
+    data: |
+      {
+          "id": null,
+          "titre": "Savon Hydratant Reduction 2",
+          "description": "Un savon doux et hydratant pour la peau sensible.",
+          "surgraissage": 5.0,
+          "avecSoude": true,
+          "concentrationAlcalin": 30.0,
+          "ligneIngredients": [
+              {
+              
+                  "quantite": 250.0,
+                  "pourcentage": 25.0,
+                  "ingredientId":2
+              },
+              {
+                  "ingredientId":1,
+                  "quantite": 750.0,
+                  "pourcentage": 75.0
+                
+              }
+          ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

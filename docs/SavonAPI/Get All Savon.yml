@@ -1,0 +1,17 @@
+info:
+  name: Get All Savon
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost:8080/api-savon/v1/recette
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKLkRvZSIsImlhdCI6MTc3MzA0OTcwMCwiZXhwIjoxNzczMDUzMzAwfQ.XwkLG-gwpH53yioz5-Z_fvbd9nxQ4_afGa6d4wYoW4s
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

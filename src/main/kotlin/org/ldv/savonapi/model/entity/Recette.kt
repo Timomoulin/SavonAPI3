@@ -30,7 +30,9 @@ class Recette(
 ) {
     var dateCreation: LocalDateTime = LocalDateTime.now()
 
-
+    fun getListCorpsGras(): List<LigneIngredient>{
+        return this.ligneIngredients.filter { it.ingredient!!.estCorpsGras==true }
+    }
 
     /**
      * Calcule les scores non pondérés pour les caractéristiques INS et Iode, en fonction des ingrédients de la recette.
@@ -41,8 +43,8 @@ class Recette(
      * Les scores calculés sont ensuite affectés aux caractéristiques correspondantes dans les résultats de la recette.
      */
     fun calculNonPondere() {
-        val ins: Double = this.ligneIngredients.sumOf { it.ingredient!!.ins * it.pourcentage / 100.toDouble() }
-        val iode: Double = this.ligneIngredients.sumOf { it.ingredient!!.iode * it.pourcentage / 100.toDouble() }
+        val ins: Double = this.getListCorpsGras().sumOf { it.ingredient!!.ins * it.pourcentage / 100.toDouble() }
+        val iode: Double = this.getListCorpsGras().sumOf { it.ingredient!!.iode * it.pourcentage / 100.toDouble() }
         this.resultats.find { it.caracteristique!!.nom == "Iode" }!!.score = iode.toFloat()
         this.resultats.find { it.caracteristique!!.nom == "Indice INS" }!!.score = ins.toFloat()
     }
@@ -58,16 +60,16 @@ class Recette(
      **/
     fun calculPondere() {
         //Calcul des scores
-        var douceur: Double = this.ligneIngredients.sumOf { it.ingredient!!.douceur * it.pourcentage / 100.toDouble() }
-        var lavant: Double = this.ligneIngredients.sumOf { it.ingredient!!.lavant * it.pourcentage / 100.toDouble() }
+        var douceur: Double = this.getListCorpsGras().sumOf { it.ingredient!!.douceur * it.pourcentage / 100.toDouble() }
+        var lavant: Double = this.getListCorpsGras().sumOf { it.ingredient!!.lavant * it.pourcentage / 100.toDouble() }
         var volMousse: Double =
             this.ligneIngredients.sumOf { it.ingredient!!.volMousse * it.pourcentage / 100.toDouble() }
         var tenueMousse: Double =
             this.ligneIngredients.sumOf { it.ingredient!!.tenueMousse * it.pourcentage / 100.toDouble() }
         var durete: Double = this.ligneIngredients.sumOf { it.ingredient!!.durete * it.pourcentage / 100.toDouble() }
         var solubilite: Double =
-            this.ligneIngredients.sumOf { it.ingredient!!.solubilite * it.pourcentage / 100.toDouble() }
-        var sechage: Double = this.ligneIngredients.sumOf { it.ingredient!!.sechage * it.pourcentage / 100.toDouble() }
+            this.getListCorpsGras().sumOf { it.ingredient!!.solubilite * it.pourcentage / 100.toDouble() }
+        var sechage: Double = this.getListCorpsGras().sumOf { it.ingredient!!.sechage * it.pourcentage / 100.toDouble() }
 
         //Modification avec le surgraissage
         douceur = douceur * (1 + 0.01494 * this.surgraissage)
@@ -102,10 +104,10 @@ class Recette(
 
         var qteAlcalinNormal = 0.0
         if (this.avecSoude) {
-            qteAlcalinNormal = this.ligneIngredients.sumOf { (it.quantite * it.ingredient!!.sapo) * (40.0 / 56 / 1000) }
+            qteAlcalinNormal = this.getListCorpsGras().sumOf { (it.quantite * it.ingredient!!.sapo) * (40.0 / 56 / 1000) }
 
         } else {
-            qteAlcalinNormal = this.ligneIngredients.sumOf { ((it.quantite * it.ingredient!!.sapo) / 1000.0) }
+            qteAlcalinNormal = this.getListCorpsGras().sumOf { ((it.quantite * it.ingredient!!.sapo) / 1000.0) }
         }
 
         var qteAlcalin = qteAlcalinNormal / (concentrationAlcalin / 100)

@@ -1,0 +1,21 @@
+info:
+  name: Login Admin
+  type: http
+  seq: 19
+
+http:
+  method: POST
+  url: http://localhost:8080/auth/login
+  body:
+    type: json
+    data: |-
+      {
+        "identifier":"admin@email.com",
+        "password":"admin@email.com1"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,6 +1,7 @@
 package org.ldv.savonapi.service
 import org.ldv.savonapi.model.dao.*
 import org.ldv.savonapi.model.entity.*
+import org.ldv.savonapi.model.id.LigneIngredientId
 import org.ldv.savonapi.model.id.ResultatId
 import org.springframework.boot.CommandLineRunner
 import org.springframework.security.crypto.password.PasswordEncoder
@@ -15,7 +16,8 @@ class DataInitializer (
     val resultatDAO: ResultatDAO,
     private val roleDAO: RoleDAO,
     private val utilisateurDAO: UtilisateurDAO,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder,
+    private val ligneIngredientDAO: LigneIngredientDAO
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
@@ -173,8 +175,7 @@ class DataInitializer (
                 apportEnEau = 371.66663f,
                 qteAlcalin = 530.95233f,
                 ligneIngredients = mutableListOf(
-                    LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = coco),
-                    LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = olive)
+
                 )
             )
 
@@ -188,12 +189,16 @@ class DataInitializer (
                 apportEnEau = 379.99997f,
                 qteAlcalin = 542.8571f,
                 ligneIngredients = mutableListOf(
-                    LigneIngredient(quantite = 250.0f, pourcentage = 25.0f, ingredient = olive),
-                    LigneIngredient(quantite = 750.0f, pourcentage = 75.0f, ingredient = coco)
+
                 )
             )
 
             recetteDAO.saveAll(listOf(recette1, recette2))
+            val ligne1=LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = coco, recette = recette1, ligneIngredientId = LigneIngredientId(ingredientId = 1L, recetteId = recette1.id!!))
+            val ligne2=LigneIngredient(quantite = 500.0f, pourcentage = 50.0f, ingredient = olive,recette= recette1,ligneIngredientId = LigneIngredientId(ingredientId = 2L, recetteId = recette1.id!!))
+            val ligne3 = LigneIngredient(quantite = 250.0f, pourcentage = 25.0f, ingredient = olive,recette=recette2, ligneIngredientId = LigneIngredientId(ingredientId=2L,recetteId=recette2.id!!))
+            val ligne4= LigneIngredient(quantite = 750.0f, pourcentage = 75.0f, ingredient = coco,recette=recette2,ligneIngredientId = LigneIngredientId(ingredientId=1L,recetteId=recette2.id!!))
+            ligneIngredientDAO.saveAll(mutableListOf(ligne1,ligne2,ligne3,ligne4))
 
             // Ajout des résultats pour chaque recette
             val resultatsRecette1 = listOf(

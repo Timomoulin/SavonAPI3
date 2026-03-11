@@ -1,0 +1,34 @@
+info:
+  name: Store Savon
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:8080/api-savon/v1/recette
+  body:
+    type: json
+    data: |
+      {
+          "id": null,
+          "titre": "Savon Hydratant",
+          "description": "Un savon doux et hydratant pour la peau sensible.",
+          "surgraissage": 0.0,
+          "avecSoude": true,
+          "concentrationAlcalin": 30.0,
+          "ligneIngredients": [
+              {
+              
+                  "quantite": 500.0,
+                  "pourcentage": 50.0,
+                  "ingredientId":1
+              }
+        
+          ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

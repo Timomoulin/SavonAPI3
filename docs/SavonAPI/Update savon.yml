@@ -1,0 +1,39 @@
+info:
+  name: Update savon
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: http://localhost:8080/api-savon/v1/recette/1
+  body:
+    type: json
+    data: |-
+      {
+          "id": 1,
+          "tite": "Savon Hydratant éxes",
+          "description": "Un savon doux et hydratant pour la peau sensible.",
+          "surgraissage": 5.0,
+          "avecSoude": true,
+          "concentrationAlcalin": 30.0,
+          "ligneIngredients": [
+              {
+              
+                  "quantite": 500.0,
+                  "pourcentage": 50.0,
+                  "ingredientId":1
+              },
+              {
+                  "ingredientId":2,
+                  "quantite": 500.0,
+                  "pourcentage": 50.0
+                
+              }
+          ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

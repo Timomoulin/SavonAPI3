@@ -1,0 +1,14 @@
+info:
+  name: ingredient par nom
+  type: http
+  seq: 10
+
+http:
+  method: GET
+  url: http://localhost:8080/api-savon/v1/ingredient/nom/Coco
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

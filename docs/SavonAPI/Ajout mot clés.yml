@@ -1,0 +1,21 @@
+info:
+  name: Ajout mot clés
+  type: http
+  seq: 11
+
+http:
+  method: PATCH
+  url: http://localhost:8080/api-savon/v1/recette/2?idMot=1
+  params:
+    - name: idMot
+      value: "1"
+      type: query
+  body:
+    type: json
+    data: idMot:1
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,22 @@
+info:
+  name: Login Utilisater
+  type: http
+  seq: 20
+
+http:
+  method: POST
+  url: http://localhost:8080/auth/register
+  body:
+    type: json
+    data: |-
+      {
+        "username":"J.Doe",
+        "email":"jondoe@email.com",
+        "password":"test123T€st"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
