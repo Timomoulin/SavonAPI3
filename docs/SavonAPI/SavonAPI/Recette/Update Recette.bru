@@ -1,0 +1,45 @@
+meta {
+  name: Update Recette
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:8080/api-savon/v1/recette/1
+  body: json
+  auth: bearer
+}
+
+auth:basic {
+  username: 
+  password: 
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3MzQxNjI4MSwiZXhwIjoxNzczNDE5ODgxfQ.0Ypy5iclFqfN-UqdGpLMQSLgMR1ET9JFLJTv7nkNHys
+}
+
+body:json {
+  {
+      "id": 1,
+      "titre": "Savon Hydratant éxes",
+      "description": "Un savon doux et hydratant pour la peau sensible.",
+      "surgraissage": 5.0,
+      "avecSoude": true,
+      "concentrationAlcalin": 30.0,
+      "ligneIngredients": [
+          {
+          
+              "quantite": 500.0,
+              "pourcentage": 50.0,
+              "ingredientId":1
+          },
+          {
+              "ingredientId":2,
+              "quantite": 500.0,
+              "pourcentage": 50.0
+            
+          }
+      ]
+  }
+}

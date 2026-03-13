@@ -1,0 +1,28 @@
+meta {
+  name: Inscription
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8080/auth/login
+  body: json
+  auth: none
+}
+
+auth:basic {
+  username: 
+  password: 
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+    "username":"J.Doe",
+    "email":"jondoe@email.com",
+    "password":"test123T€st"
+  }
+}

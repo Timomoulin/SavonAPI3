@@ -43,7 +43,7 @@ class RecetteController(
     @PreAuthorize("isAuthenticated()")
     @GetMapping
     fun mesRecettes(authentication: Authentication): List<Recette> {
-val utilisateur = utilisateurDAO.findByUsername(authentication.name)
+val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
         if(utilisateur==null) throw RuntimeException()
         val savons = utilisateur.recettes
         return savons
@@ -56,7 +56,7 @@ val utilisateur = utilisateurDAO.findByUsername(authentication.name)
      * @return Une réponse HTTP contenant la recette si elle existe,
      * ou un statut 404 si aucune recette n'est trouvée.
      */
-    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.principal)")
     @GetMapping("/{id}")
     fun show(@PathVariable id: Long): ResponseEntity<Recette> {
         val recette = this.recetteDAO.findById(id)
@@ -76,7 +76,7 @@ val utilisateur = utilisateurDAO.findByUsername(authentication.name)
     @PreAuthorize("isAuthenticated()")
     @PostMapping
     fun store(@RequestBody recetteFormDTO: RecetteFormDTO,authentication: Authentication): ResponseEntity<Recette> {
-        val utilisateur = utilisateurDAO.findByUsername(authentication.name)
+        val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
         val savedRecette = this.simulateurService.toRecette(recetteFormDTO,utilisateur)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRecette)
     }
@@ -91,7 +91,7 @@ val utilisateur = utilisateurDAO.findByUsername(authentication.name)
      * @param recetteFormDTO Un objet `RecetteFormDTO` contenant les nouvelles données de la recette.
      * @return Une réponse HTTP avec la recette mise à jour et un statut HTTP 201 (Created).
      */
-    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.principal)")
     @PutMapping("/{id}")
     fun store(@PathVariable id: Long, @RequestBody recetteFormDTO: RecetteFormDTO): ResponseEntity<Recette> {
         recetteFormDTO.id = id
@@ -107,15 +107,20 @@ val utilisateur = utilisateurDAO.findByUsername(authentication.name)
      * - `204 No Content` si la suppression a été effectuée avec succès.
      * - `404 Not Found` si aucune recette avec l'ID spécifié n'existe.
      */
-    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.name)")
+    @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.principal)")
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long,authentication: Authentication): ResponseEntity<Void> {
+        val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
+        if(utilisateur==null) throw RuntimeException()
+        if(utilisateur.recettes.find { it.id == id }==null || utilisateur.role.nomLogic == "ADMIN") {
 
-        return if (recetteDAO.existsById(id)) {
+        if (recetteDAO.existsById(id)) {
             recetteDAO.deleteById(id)
-            ResponseEntity.noContent().build()
+           return ResponseEntity.noContent().build()
         } else {
-            ResponseEntity.notFound().build()
+          return  ResponseEntity.notFound().build()
         }
+        }
+       return ResponseEntity.notFound().build()
     }
 }

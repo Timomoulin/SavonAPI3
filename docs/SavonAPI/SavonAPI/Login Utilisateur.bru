@@ -1,0 +1,27 @@
+meta {
+  name: Login Utilisateur
+  type: http
+  seq: 8
+}
+
+post {
+  url: http://localhost:8080/auth/register
+  body: json
+  auth: none
+}
+
+auth:basic {
+  username: 
+  password: 
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  {
+    "identifier":"Ruetasilitu",
+    "password":"utilisateur@email.com1"
+  }
+}

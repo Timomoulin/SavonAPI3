@@ -1,0 +1,20 @@
+meta {
+  name: Delete Recette
+  type: http
+  seq: 9
+}
+
+delete {
+  url: http://localhost:8080/api-savon/v1/recette/1
+  body: none
+  auth: bearer
+}
+
+auth:basic {
+  username: 
+  password: 
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3MzQxNjI4MSwiZXhwIjoxNzczNDE5ODgxfQ.0Ypy5iclFqfN-UqdGpLMQSLgMR1ET9JFLJTv7nkNHys
+}

@@ -28,7 +28,8 @@ class SimulateurService(
     val ingredientDAO: IngredientDAO,
     val ligneIngredientDAO: LigneIngredientDAO,
     val mentionDAO: MentionDAO,
-    val resultatDAO: ResultatDAO
+    val resultatDAO: ResultatDAO,
+    private val utilisateurDAO: UtilisateurDAO
 ) {
 
     /**
@@ -137,11 +138,11 @@ class SimulateurService(
 
 
     fun appartenir(recetteId: Long, username: String): Boolean {
-
+        val utilisateur = utilisateurDAO.findByUsernameOrEmail(username, username)
         val recette = recetteDAO.findById(recetteId)
 
         if (recette.isEmpty) return false
 
-        return recette.get().utilisateur?.username == username
+        return recette.get().utilisateur?.username == utilisateur?.username
     }
 }

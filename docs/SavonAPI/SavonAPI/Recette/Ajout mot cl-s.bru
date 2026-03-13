@@ -1,0 +1,28 @@
+meta {
+  name: Ajout mot cl-s
+  type: http
+  seq: 10
+}
+
+patch {
+  url: http://localhost:8080/api-savon/v1/recette/2?idMot=1
+  body: json
+  auth: none
+}
+
+query {
+  idMot: 1
+}
+
+auth:basic {
+  username: 
+  password: 
+}
+
+auth:bearer {
+  token: 
+}
+
+body:json {
+  idMot:1
+}
