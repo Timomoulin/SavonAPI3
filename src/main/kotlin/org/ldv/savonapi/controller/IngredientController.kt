@@ -25,7 +25,7 @@ class IngredientController (val ingredientDAO: IngredientDAO, private val recett
      *
      * @return Liste d'ingrédients.
      */
-
+@PreAuthorize("permitAll()")
     @GetMapping
     fun index(): List<Ingredient> {
         return this.ingredientDAO.findAll()

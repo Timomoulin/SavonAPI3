@@ -5,6 +5,7 @@ import org.ldv.savonapi.model.dao.RoleDAO
 import org.ldv.savonapi.model.dao.UtilisateurDAO
 import org.ldv.savonapi.model.entity.Utilisateur
 import org.ldv.savonapi.security.JwtService
+import org.springframework.security.access.prepost.PreAuthorize
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -22,6 +23,7 @@ class AuthController(
 ) {
 
     @PostMapping("/login")
+    @PreAuthorize("permitAll()")
     fun login(@RequestBody request: RequeteLogin): Map<String, String> {
 
         val authentication = authenticationManager.authenticate(
@@ -37,6 +39,7 @@ class AuthController(
     }
 
     @PostMapping("/register")
+    @PreAuthorize("permitAll()")
     fun register(@RequestBody request: RequeteInscription): Map<String, String> {
 
         if (utilisateurRepository.existsByUsername(request.username)) {

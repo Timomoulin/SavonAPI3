@@ -40,11 +40,17 @@ class RecetteController(
         return this.recetteDAO.findAll()
     }
 
+    /**
+     * Récupère seulement les recettes de l'utilisateur
+     * @param authentication un objet qui contient les informations de l'utilisateur
+     * @return Une liste de toutes les recettes de l'utilisateur
+     */
     @PreAuthorize("isAuthenticated()")
     @GetMapping
     fun mesRecettes(authentication: Authentication): List<Recette> {
-val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
-        if(utilisateur==null) throw RuntimeException()
+        val utilisateur =
+            utilisateurDAO.findByUsernameOrEmail(authentication.principal as String, authentication.principal as String)
+        if (utilisateur == null) throw RuntimeException()
         val savons = utilisateur.recettes
         return savons
     }
@@ -75,9 +81,10 @@ val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal 
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping
-    fun store(@RequestBody recetteFormDTO: RecetteFormDTO,authentication: Authentication): ResponseEntity<Recette> {
-        val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
-        val savedRecette = this.simulateurService.toRecette(recetteFormDTO,utilisateur)
+    fun store(@RequestBody recetteFormDTO: RecetteFormDTO, authentication: Authentication): ResponseEntity<Recette> {
+        val utilisateur =
+            utilisateurDAO.findByUsernameOrEmail(authentication.principal as String, authentication.principal as String)
+        val savedRecette = this.simulateurService.toRecette(recetteFormDTO, utilisateur)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRecette)
     }
 
@@ -109,18 +116,19 @@ val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal 
      */
     @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.principal)")
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: Long,authentication: Authentication): ResponseEntity<Void> {
-        val utilisateur = utilisateurDAO.findByUsernameOrEmail(authentication.principal as String,authentication.principal as String)
-        if(utilisateur==null) throw RuntimeException()
-        if(utilisateur.recettes.find { it.id == id }==null || utilisateur.role.nomLogic == "ADMIN") {
+    fun delete(@PathVariable id: Long, authentication: Authentication): ResponseEntity<Void> {
+        val utilisateur =
+            utilisateurDAO.findByUsernameOrEmail(authentication.principal as String, authentication.principal as String)
+        if (utilisateur == null) throw RuntimeException()
+        if (utilisateur.recettes.find { it.id == id } == null || utilisateur.role.nomLogic == "ADMIN") {
 
-        if (recetteDAO.existsById(id)) {
-            recetteDAO.deleteById(id)
-           return ResponseEntity.noContent().build()
-        } else {
-          return  ResponseEntity.notFound().build()
+            if (recetteDAO.existsById(id)) {
+                recetteDAO.deleteById(id)
+                return ResponseEntity.noContent().build()
+            } else {
+                return ResponseEntity.notFound().build()
+            }
         }
-        }
-       return ResponseEntity.notFound().build()
+        return ResponseEntity.notFound().build()
     }
 }
