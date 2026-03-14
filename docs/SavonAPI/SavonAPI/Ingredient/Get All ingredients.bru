@@ -1,0 +1,15 @@
+meta {
+  name: Get All ingredients
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api-savon/v1/ingredient
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczNDk2NDEyLCJleHAiOjE3NzM1MDAwMTJ9.zS7DSBB39XAZS5KGZ9Bxw4ETDGEi8A-igOCXc8K0eNs
+}
