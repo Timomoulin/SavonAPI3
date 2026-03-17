@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api-savon/v1/")
+@RequestMapping("/api-savon/v1/utilisateur")
 class AdminUtilisateurController (
     val utilisateurDAO: UtilisateurDAO,
     val roleDAO: RoleDAO
