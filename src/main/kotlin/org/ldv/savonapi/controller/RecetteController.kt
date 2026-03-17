@@ -120,7 +120,7 @@ class RecetteController(
         val utilisateur =
             utilisateurDAO.findByUsernameOrEmail(authentication.principal as String, authentication.principal as String)
         if (utilisateur == null) throw RuntimeException()
-        if (utilisateur.recettes.find { it.id == id } == null || utilisateur.role.nomLogic == "ADMIN") {
+        if (utilisateur.recettes.find { it.id == id } != null || utilisateur.role.nomLogic == "ADMIN") {
 
             if (recetteDAO.existsById(id)) {
                 recetteDAO.deleteById(id)
