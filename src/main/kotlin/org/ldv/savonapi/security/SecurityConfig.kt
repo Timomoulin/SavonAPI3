@@ -36,7 +36,7 @@ class SecurityConfig(
 
         http
             .csrf { it.disable() }
-            .cors(Customizer.withDefaults<>())
+            .cors(Customizer.withDefaults())
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
