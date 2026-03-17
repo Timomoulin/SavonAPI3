@@ -1,5 +1,6 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -16,6 +17,7 @@ class Role (
     var id: Long? = null,
     var nom: String,
     var nomLogic: String,
+    @JsonIgnore
     @OneToMany(mappedBy = "role", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     open var utilisateurs: MutableSet<Utilisateur> = mutableSetOf()
 ) {
