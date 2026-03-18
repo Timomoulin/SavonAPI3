@@ -1,5 +1,6 @@
 package org.ldv.savonapi.model.entity
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
@@ -21,6 +22,7 @@ import java.time.LocalDateTime
     open var username: String,
     @Column(unique = true)
     open var email: String,
+    @JsonIgnore
     open var password: String,
     var estBanned: Boolean = false,
     @ManyToOne

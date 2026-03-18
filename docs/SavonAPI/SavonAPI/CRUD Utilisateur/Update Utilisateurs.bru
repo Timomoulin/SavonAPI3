@@ -1,0 +1,30 @@
+meta {
+  name: Update Utilisateurs
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api-savon/v1/utilisateur/2
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ
+}
+
+body:json {
+  {
+    "id":2,
+    "username": "user1Up",
+    "email": "user1up@mail.com",
+    "role": {
+      "id": 2,
+      "nomLogic": "ROLE_USER",
+      "nom":"utilisateur"
+    },
+    "estBanned": false,
+    "nouveauMotDePasse": "password123"
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: ShowUtilisateurs
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/api-savon/v1/utilisateur/2
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ
+}

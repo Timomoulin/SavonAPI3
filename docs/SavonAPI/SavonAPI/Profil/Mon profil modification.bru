@@ -1,0 +1,29 @@
+meta {
+  name: Mon profil modification
+  type: http
+  seq: 2
+}
+
+put {
+  url: http://localhost:8080/api-savon/v1/profil
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczODY3MTYzLCJleHAiOjE3NzM4NzA3NjN9.QZA7milmG6Ni0-UkbVNFlXo4U-iTzIO9pS5EhMzf_1k
+}
+
+body:json {
+  {
+    "username": "admin2",
+    "email": "admin2@mail.com",
+    "role": {
+      "id": 1,
+      "nom":"admin",
+      "nomLogic": "ROLE_ADMIN"
+    },
+    "estBanned": false,
+    "nouveauMotDePasse": "nouveauPassword"
+  }
+}

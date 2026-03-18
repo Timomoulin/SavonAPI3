@@ -1,0 +1,740 @@
+{
+  "name": "SavonAPI",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "Inscription",
+      "seq": 9,
+      "request": {
+        "url": "http://localhost:8080/auth/register",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"username\":\"J.Doe\",\n  \"email\":\"jondoe@email.com\",\n  \"password\":\"test123T€st\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login Admin",
+      "seq": 7,
+      "request": {
+        "url": "http://localhost:8080/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"identifier\":\"admin@email.com\",\n  \"password\":\"admin@email.com1\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login Utilisateur 2",
+      "seq": 4,
+      "request": {
+        "url": "http://localhost:8080/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"identifier\":\"Ruetasilitu\",\n  \"password\":\"utilisateur@email.com1\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "http",
+      "name": "Login Utilisateur",
+      "seq": 8,
+      "request": {
+        "url": "http://localhost:8080/auth/login",
+        "method": "POST",
+        "headers": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"identifier\":\"J.Doe\",\n  \"password\":\"test123T€st\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": []
+        },
+        "auth": {
+          "mode": "none",
+          "basic": {
+            "username": "",
+            "password": ""
+          },
+          "bearer": {
+            "token": ""
+          }
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "query": []
+      }
+    },
+    {
+      "type": "folder",
+      "name": "Ingredient",
+      "items": [
+        {
+          "type": "http",
+          "name": "Get All ingredients",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/ingredient",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Post ingredient",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/ingredient",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"nom\": \"Huile de lin \",\n  \"iode\": 80,\n  \"ins\": 110,\n  \"sapo\": 189,\n  \"volMousse\": 10,\n  \"tenueMousse\": 9,\n  \"douceur\": 9,\n  \"lavant\": 10,\n  \"durete\": 10,\n  \"solubilite\": 9,\n  \"sechage\": 10,\n  \"estCorpsGras\": true\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Recette",
+      "items": [
+        {
+          "type": "http",
+          "name": "Ajout mot cl-s",
+          "seq": 10,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/2?idMot=1",
+            "method": "PATCH",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "idMot:1",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "idMot",
+                "value": "1",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Count Recette",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/count",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Delete Recette",
+          "seq": 9,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/1",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3MzQxNjI4MSwiZXhwIjoxNzczNDE5ODgxfQ.0Ypy5iclFqfN-UqdGpLMQSLgMR1ET9JFLJTv7nkNHys"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get All Recette",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/all",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczNDk0Mjg3LCJleHAiOjE3NzM0OTc4ODd9.fXTa65Ogi_HdbyoKgtCoZEcBvWpdrNuUZPYaAMaLSUE"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Get Mes Recettes",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczNDk3NzgwLCJleHAiOjE3NzM1MDEzODB9.m8e0WQ-UqdQ3tkQ7PU2oOexhfuxc989KDUCAwNIscXo"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Show Recette",
+          "seq": 8,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/1",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Store Recette Deficit",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant Reduction 2\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 250.0,\n            \"pourcentage\": 25.0,\n            \"ingredientId\":2\n        },\n        {\n            \"ingredientId\":1,\n            \"quantite\": 750.0,\n            \"pourcentage\": 75.0\n          \n        }\n    ]\n}\n",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczNDk0Mjg3LCJleHAiOjE3NzM0OTc4ODd9.fXTa65Ogi_HdbyoKgtCoZEcBvWpdrNuUZPYaAMaLSUE"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Store Recette Ex-s",
+          "seq": 6,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 50,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 99.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}\n",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Store Recette",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": null,\n    \"titre\": \"Savon Hydratant\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 0.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        }\n  \n    ]\n}\n",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update Recette",
+          "seq": 7,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/recette/1",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n    \"id\": 1,\n    \"titre\": \"Savon Hydratant éxes\",\n    \"description\": \"Un savon doux et hydratant pour la peau sensible.\",\n    \"surgraissage\": 5.0,\n    \"avecSoude\": true,\n    \"concentrationAlcalin\": 30.0,\n    \"ligneIngredients\": [\n        {\n        \n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0,\n            \"ingredientId\":1\n        },\n        {\n            \"ingredientId\":2,\n            \"quantite\": 500.0,\n            \"pourcentage\": 50.0\n          \n        }\n    ]\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3MzQxNjI4MSwiZXhwIjoxNzczNDE5ODgxfQ.0Ypy5iclFqfN-UqdGpLMQSLgMR1ET9JFLJTv7nkNHys"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "Profil",
+      "items": [
+        {
+          "type": "http",
+          "name": "Mon profil",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/profil",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczODY2OTY5LCJleHAiOjE3NzM4NzA1Njl9.E1rdnNO7naGveoW4D_Bu2Hb8vGu_e714hGkgI7EFduU"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Mon profil modification",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/profil",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"admin2\",\n  \"email\": \"admin2@mail.com\",\n  \"role\": {\n    \"id\": 1,\n    \"nom\":\"admin\",\n    \"nomLogic\": \"ROLE_ADMIN\"\n  },\n  \"estBanned\": false,\n  \"nouveauMotDePasse\": \"nouveauPassword\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWV0YXNpbGl0dSIsInJvbGUiOiJST0xFX1VUSUxJU0FURVVSIiwiaWF0IjoxNzczODY3MTYzLCJleHAiOjE3NzM4NzA3NjN9.QZA7milmG6Ni0-UkbVNFlXo4U-iTzIO9pS5EhMzf_1k"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    },
+    {
+      "type": "folder",
+      "name": "CRUD Utilisateur",
+      "items": [
+        {
+          "type": "http",
+          "name": "Create Utilisateurs",
+          "seq": 3,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/utilisateur",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"username\": \"user1\",\n  \"email\": \"user1@mail.com\",\n  \"role\": {\n    \"id\": 2,\n    \"nomLogic\": \"ROLE_USER\",\n    \"nom\":\"utilisateur\"\n  },\n  \"estBanned\": false,\n  \"nouveauMotDePasse\": \"password123\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Update Utilisateurs",
+          "seq": 4,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/utilisateur/2",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"id\":2,\n  \"username\": \"user1Up\",\n  \"email\": \"user1up@mail.com\",\n  \"role\": {\n    \"id\": 2,\n    \"nomLogic\": \"ROLE_USER\",\n    \"nom\":\"utilisateur\"\n  },\n  \"estBanned\": false,\n  \"nouveauMotDePasse\": \"password123\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "ShowUtilisateurs",
+          "seq": 1,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/utilisateur/2",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Index Utilisateurs",
+          "seq": 2,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/utilisateur",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Del Utilisateurs",
+          "seq": 5,
+          "request": {
+            "url": "http://localhost:8080/api-savon/v1/utilisateur/3",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "bearer",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc3Mzg2NjgyOSwiZXhwIjoxNzczODcwNDI5fQ.E5u56vkIFPh7phSqzjPAiSpjL2_FlNzbtudnUDUBruQ"
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    }
+  ],
+  "environments": []
+}
