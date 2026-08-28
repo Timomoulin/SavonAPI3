@@ -13,7 +13,7 @@ import jakarta.persistence.OneToMany
 import java.time.LocalDateTime
 
 @Entity
-  class Utilisateur(
+class Utilisateur(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
@@ -29,10 +29,12 @@ import java.time.LocalDateTime
     @JoinColumn(name = "role_id")
     open var role: Role,
     @OneToMany(mappedBy = "utilisateur", cascade = [CascadeType.REMOVE], orphanRemoval = true)
-    open var recettes: MutableList<Recette> = mutableListOf()
-){
- var dateCreation: LocalDateTime = LocalDateTime.now()
-
+    open var recettes: MutableList<Recette> = mutableListOf(),
+    @JsonIgnore
+    @OneToMany(mappedBy = "utilisateur", cascade = [CascadeType.REMOVE], orphanRemoval = true)
+    open var confirmationUtilisateurs: MutableList<ConfirmationUtilisateur> = mutableListOf()
+) {
+    var dateCreation: LocalDateTime = LocalDateTime.now()
 
 
 }
