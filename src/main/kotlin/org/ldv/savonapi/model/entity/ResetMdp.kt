@@ -5,10 +5,11 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import java.rmi.server.UID
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
+import java.security.SecureRandom
 import java.time.LocalDateTime
-import kotlin.random.Random
-import kotlin.random.Random.Default.nextInt
+
 
 @Entity
 class ResetMdp (
@@ -16,11 +17,16 @@ class ResetMdp (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     open val id: Long? = null,
-    val key: String,
-    val codeSecret:Int= nextInt(100000, 999999),
+    @Column(nullable = false,unique = true)
+    val keyHash: String,
+    @Column(nullable = false)
+    val codeSecret:String= SecureRandom().nextInt(100000,1000000).toString(),
+    @Column(nullable = false)
     val expiration: LocalDateTime = LocalDateTime.now().plusMinutes(30L),
-    val email: String,
-
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    open val utilisateur: Utilisateur,
+    var estUtilise: Boolean = false
 ){
 
 }

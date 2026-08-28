@@ -25,14 +25,13 @@ class Utilisateur(
     @JsonIgnore
     open var password: String,
     var estBanned: Boolean = false,
+    var estActif: Boolean = false,
     @ManyToOne
     @JoinColumn(name = "role_id")
     open var role: Role,
     @OneToMany(mappedBy = "utilisateur", cascade = [CascadeType.REMOVE], orphanRemoval = true)
     open var recettes: MutableList<Recette> = mutableListOf(),
-    @JsonIgnore
-    @OneToMany(mappedBy = "utilisateur", cascade = [CascadeType.REMOVE], orphanRemoval = true)
-    open var confirmationUtilisateurs: MutableList<ConfirmationUtilisateur> = mutableListOf()
+
 ) {
     var dateCreation: LocalDateTime = LocalDateTime.now()
 

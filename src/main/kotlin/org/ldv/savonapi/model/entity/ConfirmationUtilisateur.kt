@@ -16,12 +16,14 @@ class ConfirmationUtilisateur (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     val id:Long?=null,
-    val token:String,
-    //TODO Expiration du token 1H
-    expiration: LocalDateTime = LocalDateTime.now().plusHours(1L),
-    @ManyToOne()
-    @JoinColumn(name = "utilisateur_id")
-    open val utilisateur: Utilisateur? = null
+    @Column(nullable = false, unique = true)
+    val tokenHash:String,
+    //TODO Expiration du token 24H
+    @Column(nullable = false)
+    val expiration: LocalDateTime = LocalDateTime.now().plusDays(1L),
+    @ManyToOne( optional = false)
+    @JoinColumn(name = "utilisateur_id", nullable = false)
+    open val utilisateur: Utilisateur
 
 ) {
 
