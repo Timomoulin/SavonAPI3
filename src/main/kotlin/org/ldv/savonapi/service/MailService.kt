@@ -31,7 +31,7 @@ class MailService(
         token: String
     ) {
         //TODO : A modifier si en fonction du serveur ou port du serveur
-        val url = "http://localhost:8080/confirm-inscription?token=$token"
+        val url = "http://localhost:8080/auth/confirm-inscription?key=$token"
         val message= """ Bonjour, Merci pour votre inscription. Pour confirmer votre adresse email, cliquez sur le lien suivant : $url Ce lien est valable pendant 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet email. Cordialement, L'équipe Savon API """.trimIndent()
         envoyerMail(destinataire, "Confirmation de votre inscription", message)
     }

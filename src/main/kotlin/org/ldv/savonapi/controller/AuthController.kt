@@ -1,4 +1,5 @@
 package org.ldv.savonapi.controller
+
 import org.ldv.savonapi.dto.RequeteInscription
 import org.ldv.savonapi.dto.RequeteLogin
 import org.ldv.savonapi.model.dao.ConfirmationUtilisateurDAO
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
+import java.time.LocalDateTime
 
 @RestController
 @CrossOrigin
@@ -72,14 +74,28 @@ class AuthController(
         val tokenConfirmation = tokenService.generateToken()
         this.mailService.envoyerConfirmationInscription(utilisateur.email, tokenConfirmation)
         val tokenConfirmationGHash = tokenService.hashToken(tokenConfirmation)
-        val confirmation = ConfirmationUtilisateur(utilisateur=utilisateur, tokenHash = tokenConfirmationGHash)
+        val confirmation = ConfirmationUtilisateur(utilisateur = utilisateur, tokenHash = tokenConfirmationGHash)
+        confirmationUtilisateurDAO.save(confirmation)
         val token = jwtService.generateToken(utilisateur.username)
 
         return mapOf("token" to token)
     }
 
+    @GetMapping("/confirm-inscription")
+    fun confirmInscription(@RequestParam("key") key: String): Map<String, String>? {
+
+        val confirmation = confirmationUtilisateurDAO.findBytokenHash(tokenService.hashToken(key))
+        if (confirmation != null && LocalDateTime.now().isBefore(confirmation.expiration)) {
+            val utilisateur = confirmation.utilisateur
+            utilisateur.estActif = true
+            utilisateurRepository.save(confirmation.utilisateur)
+            return mapOf("result" to "ok")
+        }
+        return mapOf("result" to "echec")
+    }
+
     @GetMapping("/testMail")
-    fun testMail(){
+    fun testMail() {
         this.mailService.envoyerMail("timomoulin@msn.com", "test", "test")
     }
 }
