@@ -1,10 +1,14 @@
 package org.ldv.savonapi.controller
 import org.ldv.savonapi.dto.RequeteInscription
 import org.ldv.savonapi.dto.RequeteLogin
+import org.ldv.savonapi.model.dao.ConfirmationUtilisateurDAO
 import org.ldv.savonapi.model.dao.RoleDAO
 import org.ldv.savonapi.model.dao.UtilisateurDAO
+import org.ldv.savonapi.model.entity.ConfirmationUtilisateur
 import org.ldv.savonapi.model.entity.Utilisateur
 import org.ldv.savonapi.security.JwtService
+import org.ldv.savonapi.service.MailService
+import org.ldv.savonapi.service.TokenService
 import org.springframework.security.access.prepost.PreAuthorize
 
 import org.springframework.security.authentication.AuthenticationManager
@@ -20,7 +24,10 @@ class AuthController(
     private val utilisateurRepository: UtilisateurDAO,
     private val roleRepository: RoleDAO,
     private val passwordEncoder: PasswordEncoder,
-    private val jwtService: JwtService
+    private val jwtService: JwtService,
+    private val mailService: MailService,
+    private val tokenService: TokenService,
+    private val confirmationUtilisateurDAO: ConfirmationUtilisateurDAO
 ) {
 
     @PostMapping("/login")
@@ -62,9 +69,17 @@ class AuthController(
         )
 
         utilisateurRepository.save(utilisateur)
-
+        val tokenConfirmation = tokenService.generateToken()
+        this.mailService.envoyerConfirmationInscription(utilisateur.email, tokenConfirmation)
+        val tokenConfirmationGHash = tokenService.hashToken(tokenConfirmation)
+        val confirmation = ConfirmationUtilisateur(utilisateur=utilisateur, tokenHash = tokenConfirmationGHash)
         val token = jwtService.generateToken(utilisateur.username)
 
         return mapOf("token" to token)
+    }
+
+    @GetMapping("/testMail")
+    fun testMail(){
+        this.mailService.envoyerMail("timomoulin@msn.com", "test", "test")
     }
 }
