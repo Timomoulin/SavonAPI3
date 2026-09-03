@@ -235,7 +235,8 @@ if (roleDAO.count() == 0L) {
         if (utilisateurDAO.count() == 0L) {
             val admin = Utilisateur(username = "Nimda", email = "admin@email.com", password = passwordEncoder.encode("admin@email.com1"), estActif = true, role = roleDAO.findById(1).orElseThrow())
             val user = Utilisateur(username = "Ruetasilitu", email = "utilisateur@email.com", password = passwordEncoder.encode("utilisateur@email.com1"),estActif = true, role = roleDAO.findById(2).orElseThrow())
-            utilisateurDAO.saveAll(listOf(admin, user))
+            val adm = Utilisateur(username = "adm", email = "adm@email.com", password = passwordEncoder.encode("123"), role = roleDAO.findById(1).orElseThrow())
+            utilisateurDAO.saveAll(listOf(admin, user, adm))
             val recettesDebut=recetteDAO.findAll()
             for (recette in recettesDebut) {
                 recette.utilisateur=user
