@@ -100,9 +100,11 @@ class RecetteController(
      */
     @PreAuthorize("hasRole('ADMIN') or @simulateurService.appartenir(#id, authentication.principal)")
     @PutMapping("/{id}")
-    fun store(@PathVariable id: Long, @RequestBody recetteFormDTO: RecetteFormDTO): ResponseEntity<Recette> {
+    fun store(@PathVariable id: Long, @RequestBody recetteFormDTO: RecetteFormDTO,authentication: Authentication): ResponseEntity<Recette> {
+        val utilisateur =
+            utilisateurDAO.findByUsernameOrEmail(authentication.principal as String, authentication.principal as String)
         recetteFormDTO.id = id
-        val savedRecette = this.simulateurService.toRecette(recetteFormDTO)
+        val savedRecette = this.simulateurService.toRecette(recetteFormDTO,utilisateur)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRecette)
     }
 
