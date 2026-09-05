@@ -51,6 +51,7 @@ class SimulateurService(
             utilisateur=utilisateur
 
         )
+
         recette = recetteDAO.save(recette)
 
         for (ligneDTO in recetteFormDTO.ligneIngredients) {
