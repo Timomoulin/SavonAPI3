@@ -1,5 +1,6 @@
 package org.ldv.savonapi.controller
 
+import org.ldv.savonapi.dto.DemandeMdpReset
 import org.ldv.savonapi.dto.RequeteInscription
 import org.ldv.savonapi.dto.RequeteLogin
 import org.ldv.savonapi.dto.RequeteMdpDTO
@@ -99,8 +100,8 @@ class AuthController(
     }
 
     @PostMapping("/mdp-oublie")
-    fun mdpOublie(@RequestBody email: String){
-
+    fun mdpOublie(@RequestBody demande: DemandeMdpReset){
+        val email = demande.email
         val errors = mutableListOf<String>()
         val utilisateur = utilisateurRepository.findByUsernameOrEmail(email, email)
         if (utilisateur == null) {
@@ -126,6 +127,7 @@ class AuthController(
                 )
             }
             }
+        println(errors)
     }
 
     @PostMapping("/mdp-reset")

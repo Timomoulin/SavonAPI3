@@ -46,12 +46,8 @@ class MailService(
 
         val lien = "http://localhost:4200/reset-mdp?key=$token"
 
-        val message = SimpleMailMessage()
 
-        message.setTo(email)
-        message.subject = "Réinitialisation de votre mot de passe"
-
-        message.text = """
+        val text = """
         Bonjour,
 
         Une demande de réinitialisation de votre mot de passe a été effectuée.
@@ -71,8 +67,8 @@ class MailService(
         Cordialement,
         L'équipe Savon API
     """.trimIndent()
-
-        mailSender.send(message)
+print(email)
+        this.envoyerMail(email,"Réinitialisation de votre mot de passe",text)
     }
 
 
