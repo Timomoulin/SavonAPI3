@@ -22,6 +22,7 @@ class DataInitializer (
 
     override fun run(vararg args: String?) {
         //Pour importer les ingredients
+        /*
         if (ingredientDAO.count() == 0L) { // Éviter les doublons
             val coco = Ingredient(
                 id = 1,
@@ -56,7 +57,7 @@ class DataInitializer (
             )
             var ingredients = listOf<Ingredient>(coco,olive)
             ingredientDAO.saveAll(ingredients)
-        }
+        }*/
         if (caracteristiqueDAO.count() == 0L) {
 
             val iode = Caracteristique(
@@ -161,6 +162,7 @@ class DataInitializer (
             // Sauvegardez toutes les mentions
             mentionDAO.saveAll(mentions)
         }
+        /*
         if (recetteDAO.count() == 0L) {
             val coco = ingredientDAO.findById(1).orElseThrow()
             val olive = ingredientDAO.findById(2).orElseThrow()
@@ -226,7 +228,7 @@ class DataInitializer (
             )
 
             resultatDAO.saveAll(resultatsRecette1 + resultatsRecette2)
-        }
+        }*/
 if (roleDAO.count() == 0L) {
     val roleAdmin = Role(id = 1, nom = "admin", nomLogic = "ROLE_ADMIN")
     val roleUser = Role(id = 2, nom = "utilisateur", nomLogic = "ROLE_UTILISATEUR")
@@ -238,10 +240,11 @@ if (roleDAO.count() == 0L) {
             val adm = Utilisateur(username = "adm", email = "adm@email.com", password = passwordEncoder.encode("123"), role = roleDAO.findById(1).orElseThrow())
             utilisateurDAO.saveAll(listOf(admin, user, adm))
             val recettesDebut=recetteDAO.findAll()
+            /*
             for (recette in recettesDebut) {
                 recette.utilisateur=user
                 recetteDAO.save(recette)
-            }
+            }*/
         }
 
         }
