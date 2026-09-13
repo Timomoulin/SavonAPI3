@@ -32,8 +32,49 @@ class MailService(
     ) {
         //TODO : A modifier si en fonction du serveur ou port du serveur
         val url = "http://localhost:8080/auth/confirm-inscription?key=$token"
-        val message= """ Bonjour, Merci pour votre inscription. Pour confirmer votre adresse email, cliquez sur le lien suivant : $url Ce lien est valable pendant 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet email. Cordialement, L'équipe Savon API """.trimIndent()
+        val message =
+            """ Bonjour, Merci pour votre inscription. Pour confirmer votre adresse email, cliquez sur le lien suivant : $url Ce lien est valable pendant 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet email. Cordialement, L'équipe Savon API """.trimIndent()
         envoyerMail(destinataire, "Confirmation de votre inscription", message)
     }
+
+
+    fun envoyerMailResetMdp(
+        email: String,
+        token: String,
+        codeSecret: String
+    ) {
+
+        val lien = "http://localhost:4200/reset-mdp?key=$token"
+
+        val message = SimpleMailMessage()
+
+        message.setTo(email)
+        message.subject = "Réinitialisation de votre mot de passe"
+
+        message.text = """
+        Bonjour,
+
+        Une demande de réinitialisation de votre mot de passe a été effectuée.
+
+        Pour continuer, cliquez sur le lien suivant :
+
+        $lien
+
+        Votre code secret est :
+
+        $codeSecret
+
+        Ce code est valable pendant 30 minutes.
+
+        Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email.
+
+        Cordialement,
+        L'équipe Savon API
+    """.trimIndent()
+
+        mailSender.send(message)
+    }
+
+
 }
 
