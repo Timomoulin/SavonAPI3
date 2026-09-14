@@ -1,14 +1,18 @@
 package org.ldv.savonapi.service
 
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.stereotype.Service
 
 @Service
 class MailService(
-    private val mailSender: JavaMailSender
+    private val mailSender: JavaMailSender,
+    @param:Value("\${application.frontend-url}")
+    val appFontale: String
 ) {
+
 
     fun envoyerMail(
         destinataire: String,
@@ -31,7 +35,7 @@ class MailService(
         token: String
     ) {
         //TODO : A modifier si en fonction du serveur ou port du serveur
-        val url = "http://localhost:8080/auth/confirm-inscription?key=$token"
+        val url = "$appFontale/confirm-inscription?key=$token"
         val message =
             """ Bonjour, Merci pour votre inscription. Pour confirmer votre adresse email, cliquez sur le lien suivant : $url Ce lien est valable pendant 24 heures. Si vous n'êtes pas à l'origine de cette inscription, vous pouvez ignorer cet email. Cordialement, L'équipe Savon API """.trimIndent()
         envoyerMail(destinataire, "Confirmation de votre inscription", message)
@@ -44,7 +48,7 @@ class MailService(
         codeSecret: String
     ) {
 
-        val lien = "http://localhost:4200/reset-mdp?key=$token"
+        val lien = "$appFontale/reset-mdp?key=$token"
 
 
         val text = """

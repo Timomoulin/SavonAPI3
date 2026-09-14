@@ -4,16 +4,19 @@ import org.springframework.stereotype.Service
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.ldv.savonapi.model.dao.UtilisateurDAO
+import org.springframework.beans.factory.annotation.Value
 import java.util.*
 import javax.crypto.SecretKey
 
 @Service
 class JwtService (
-    val utilisateurDAO: UtilisateurDAO
+    val utilisateurDAO: UtilisateurDAO,
+    @param:Value("\${jwt.secret}")
+    val APP_S: String = "SavonApi"
 ) {
 
     private val secret: SecretKey = Keys.hmacShaKeyFor(
-        "super-secret-api-savon:3Z-a5b-@-42".toByteArray()
+        APP_S.toByteArray()
     )
 
     fun generateToken(username: String): String {
