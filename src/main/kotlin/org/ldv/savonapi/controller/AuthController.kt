@@ -1,6 +1,7 @@
 package org.ldv.savonapi.controller
 
 import org.ldv.savonapi.dto.DemandeMdpReset
+import org.ldv.savonapi.dto.RefreshTokenDTO
 import org.ldv.savonapi.dto.RequeteInscription
 import org.ldv.savonapi.dto.RequeteLogin
 import org.ldv.savonapi.dto.RequeteMdpDTO
@@ -13,13 +14,16 @@ import org.ldv.savonapi.model.entity.ResetMdp
 import org.ldv.savonapi.model.entity.Utilisateur
 import org.ldv.savonapi.security.JwtService
 import org.ldv.savonapi.service.MailService
+import org.ldv.savonapi.service.RefreshTokenService
 import org.ldv.savonapi.service.TokenService
+import org.springframework.http.HttpStatus
 import org.springframework.security.access.prepost.PreAuthorize
 
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import java.time.LocalDateTime
 
 @RestController
@@ -34,7 +38,8 @@ class AuthController(
     private val mailService: MailService,
     private val tokenService: TokenService,
     private val confirmationUtilisateurDAO: ConfirmationUtilisateurDAO,
-    private val resetMdpRepository: ResetMdpDAO
+    private val resetMdpRepository: ResetMdpDAO,
+    private val refreshTokenService: RefreshTokenService,
 ) {
 
     @PostMapping("/login")
@@ -49,8 +54,47 @@ class AuthController(
         )
 
         val token = jwtService.generateToken(request.identifier)
+        val utilisateur = utilisateurRepository.findByUsernameOrEmail(request.identifier, request.identifier)
+        val refreshToken =
+            refreshTokenService.createRefreshToken(utilisateur!!)
+        return mapOf("token" to token, "refreshToken" to refreshToken)
+    }
 
-        return mapOf("token" to token)
+    @PostMapping("/refresh")
+    @PreAuthorize("permitAll()")
+    fun refresh(
+        @RequestBody request: RefreshTokenDTO
+    ): Map<String, String> {
+
+        val refreshToken = refreshTokenService.findValidRefreshToken(
+            request.refreshToken
+        )
+
+        if (refreshToken == null) {
+            throw ResponseStatusException(
+                HttpStatus.UNAUTHORIZED,
+                "Refresh token invalide ou expiré"
+            )
+        }
+
+        val utilisateur = refreshToken.utilisateur
+
+        // Révoque l'ancien refresh token
+        refreshTokenService.revoke(refreshToken)
+
+        // Génère un nouvel access token
+        val accessToken = jwtService.generateToken(
+            utilisateur.username
+        )
+
+        // Génère un nouveau refresh token
+        val nouveauRefreshToken =
+            refreshTokenService.createRefreshToken(utilisateur)
+
+        return mapOf(
+            "accessToken" to accessToken,
+            "refreshToken" to nouveauRefreshToken
+        )
     }
 
     @PostMapping("/register")

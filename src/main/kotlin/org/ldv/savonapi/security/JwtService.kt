@@ -7,12 +7,12 @@ import org.ldv.savonapi.model.dao.UtilisateurDAO
 import org.springframework.beans.factory.annotation.Value
 import java.util.*
 import javax.crypto.SecretKey
-
 @Service
-class JwtService (
+class JwtService(
     val utilisateurDAO: UtilisateurDAO,
+
     @param:Value("\${jwt.secret}")
-    val APP_S: String = "SavonApi"
+    val APP_S: String
 ) {
 
     private val secret: SecretKey = Keys.hmacShaKeyFor(
@@ -20,17 +20,25 @@ class JwtService (
     )
 
     fun generateToken(username: String): String {
-        val user = utilisateurDAO.findByUsernameOrEmail(username,username)
+
+        val user = utilisateurDAO.findByUsernameOrEmail(
+            username,
+            username
+        )
+
         return Jwts.builder()
             .subject(username)
-            .claim("role",user?.role?.nomLogic )
+            .claim("role", user?.role?.nomLogic)
             .issuedAt(Date())
-            .expiration(Date(System.currentTimeMillis() + 1000 * 60 * 60))
+            .expiration(
+                Date(System.currentTimeMillis() + 1000 * 60 * 15)
+            )
             .signWith(secret)
             .compact()
     }
 
     fun extractUsername(token: String): String {
+
         val claims = Jwts.parser()
             .verifyWith(secret)
             .build()
@@ -41,6 +49,7 @@ class JwtService (
     }
 
     fun extractClaim(token: String): String {
+
         val claims = Jwts.parser()
             .verifyWith(secret)
             .build()
