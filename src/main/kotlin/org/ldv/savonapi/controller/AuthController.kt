@@ -53,8 +53,15 @@ class AuthController(
             )
         )
 
+
+        val utilisateur = utilisateurRepository.findByUsernameOrEmail(request.identifier, request.identifier)!!
+        if (!utilisateur.estActif) {
+            throw ResponseStatusException(
+                HttpStatus.FORBIDDEN,
+                "Compte non activé"
+            )
+        }
         val token = jwtService.generateToken(request.identifier)
-        val utilisateur = utilisateurRepository.findByUsernameOrEmail(request.identifier, request.identifier)
         val refreshToken =
             refreshTokenService.createRefreshToken(utilisateur!!)
         return mapOf("token" to token, "refreshToken" to refreshToken)
@@ -78,7 +85,12 @@ class AuthController(
         }
 
         val utilisateur = refreshToken.utilisateur
-
+        if (!utilisateur.estActif) {
+            throw ResponseStatusException(
+                HttpStatus.FORBIDDEN,
+                "Compte non activé"
+            )
+        }
         // Révoque l'ancien refresh token
         refreshTokenService.revoke(refreshToken)
 
@@ -127,7 +139,10 @@ class AuthController(
         confirmationUtilisateurDAO.save(confirmation)
         val token = jwtService.generateToken(utilisateur.username)
 
-        return mapOf("token" to token)
+        //return mapOf("token" to token)
+        return mapOf(
+            "message" to "Inscription réussie. Un email de confirmation vous a été envoyé."
+        )
     }
 
     @GetMapping("/confirm-inscription")

@@ -1,11 +1,11 @@
 meta {
-  name: Inscription
+  name: Login Utilisateur2
   type: http
-  seq: 9
+  seq: 8
 }
 
 post {
-  url: http://localhost:8080/auth/register
+  url: http://localhost:8080/auth/login
   body: json
   auth: none
 }
@@ -21,8 +21,7 @@ auth:bearer {
 
 body:json {
   {
-    "username":"J.Doe",
-    "email":"timomoulin@msn.com",
+    "identifier":"timomoulin@msn.com",
     "password":"test123T€st"
   }
 }

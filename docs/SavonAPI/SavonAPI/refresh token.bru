@@ -1,0 +1,17 @@
+meta {
+  name: refresh token
+  type: http
+  seq: 9
+}
+
+post {
+  url: http://localhost:8080/auth/refresh
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "refreshToken":"42naxGp1sMea_wfp4syj4UR2D4ulwUJwguIHfTpAyWI"
+  }
+}
