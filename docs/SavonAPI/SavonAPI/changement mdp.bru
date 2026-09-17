@@ -1,0 +1,23 @@
+meta {
+  name: changement mdp
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/auth/mdp-reset?key=M1llZVIXypmLddFYdLGUb7HCBE5b9HzQxeH2GIZcElk
+  body: json
+  auth: none
+}
+
+query {
+  key: M1llZVIXypmLddFYdLGUb7HCBE5b9HzQxeH2GIZcElk
+}
+
+body:json {
+  {
+    "nouveauMotDePasse":"test123",
+    "nouveauMotDePasseConfirmation":"test123",
+    "code":529211
+  }
+}
