@@ -56,10 +56,8 @@ class AuthController(
 
         val utilisateur = utilisateurRepository.findByUsernameOrEmail(request.identifier, request.identifier)!!
         if (!utilisateur.estActif) {
-            throw ResponseStatusException(
-                HttpStatus.FORBIDDEN,
-                "Compte non activé"
-            )
+            return mapOf("error" to "Compte non activé")
+
         }
         val token = jwtService.generateToken(request.identifier)
         val refreshToken =
@@ -114,11 +112,13 @@ class AuthController(
     fun register(@RequestBody request: RequeteInscription): Map<String, String> {
 
         if (utilisateurRepository.existsByUsername(request.username)) {
-            throw RuntimeException("Username déjà utilisé")
+            return mapOf("error" to "Username déjà utilisé")
+
         }
 
         if (utilisateurRepository.existsByEmail(request.email)) {
-            throw RuntimeException("Email déjà utilisé")
+            return mapOf("error" to "Email déjà utilisé")
+
         }
 
         val roleUser = roleRepository.findByNomLogic("ROLE_UTILISATEUR")

@@ -10,5 +10,6 @@ data class UtilisateurDTO(
     val nouveauMotDePasse: String?,
     val role: Role,
     val estBanned: Boolean,
+    val estActif: Boolean,
     val recettes: MutableList<Recette>?
     )
