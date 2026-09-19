@@ -1,11 +1,11 @@
 meta {
-  name: Inscription
+  name: Login Admin2
   type: http
-  seq: 8
+  seq: 11
 }
 
 post {
-  url: http://localhost:8080/auth/register
+  url: http://localhost:8080/auth/login
   body: json
   auth: none
 }
@@ -21,8 +21,7 @@ auth:bearer {
 
 body:json {
   {
-    "username":"bmars",
-    "email":"ljules.pro@gmail.com",
+    "identifier":"adm",
     "password":"123"
   }
 }
