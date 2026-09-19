@@ -13,7 +13,7 @@ class UtilisateurService (
     val passwordEncoder: PasswordEncoder
 ){
     fun toDTO(utilisateur: Utilisateur): UtilisateurDTO{
-        val dto = UtilisateurDTO(id = utilisateur.id,username = utilisateur.username,email = utilisateur.email,role = utilisateur.role,estBanned = utilisateur.estBanned, recettes = utilisateur.recettes, nouveauMotDePasse = null)
+        val dto = UtilisateurDTO(id = utilisateur.id,username = utilisateur.username,email = utilisateur.email,role = utilisateur.role,estBanned = utilisateur.estBanned, recettes = utilisateur.recettes, estActif = utilisateur.estActif, nouveauMotDePasse = null)
         return dto
     }
 
@@ -31,13 +31,14 @@ class UtilisateurService (
             entity.role = dto.role
             entity.estBanned = dto.estBanned
             entity.password = mdp
+            entity.estActif = dto.estActif
 
         }
         else{
             if (dto.nouveauMotDePasse == null) {
                 throw RuntimeException("Le nouveau mot de passe est requis")
             }
-            entity = Utilisateur(username = dto.username, email = dto.email, role = dto.role, estBanned = dto.estBanned, recettes = mutableListOf(),password = passwordEncoder.encode(dto.nouveauMotDePasse!!))
+            entity = Utilisateur(username = dto.username, email = dto.email, role = dto.role, estBanned = dto.estBanned, estActif = dto.estActif, recettes = mutableListOf(),password = passwordEncoder.encode(dto.nouveauMotDePasse!!))
         }
         return entity
 
