@@ -10,4 +10,5 @@ interface UtilisateurDAO : JpaRepository<Utilisateur, Long> {
     fun existsByUsername(username: String): Boolean
 
     fun existsByEmail(email: String): Boolean
+
 }

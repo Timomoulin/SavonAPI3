@@ -10,5 +10,5 @@ interface ResetMdpDAO : JpaRepository<ResetMdp, Long> {
 
 
     fun findByUtilisateur_Id(id: Long): List<ResetMdp>
-
+    fun deleteByUtilisateur_Id(id: Long)
 }

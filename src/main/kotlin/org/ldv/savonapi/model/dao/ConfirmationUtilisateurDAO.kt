@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface ConfirmationUtilisateurDAO : JpaRepository<ConfirmationUtilisateur, Long> {
     fun findBytokenHash(token: String): ConfirmationUtilisateur?
+    fun deleteByUtilisateur_Id(id: Long)
 }

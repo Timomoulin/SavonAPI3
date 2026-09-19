@@ -1,6 +1,10 @@
 package org.ldv.savonapi.service
 
+import jakarta.transaction.Transactional
 import org.ldv.savonapi.dto.UtilisateurDTO
+import org.ldv.savonapi.model.dao.ConfirmationUtilisateurDAO
+import org.ldv.savonapi.model.dao.RefreshTokenDAO
+import org.ldv.savonapi.model.dao.ResetMdpDAO
 import org.ldv.savonapi.model.dao.RoleDAO
 import org.ldv.savonapi.model.dao.UtilisateurDAO
 import org.ldv.savonapi.model.entity.Utilisateur
@@ -10,7 +14,10 @@ import org.springframework.stereotype.Service
 @Service
 class UtilisateurService (
     val utilisateurDAO: UtilisateurDAO,
-    val passwordEncoder: PasswordEncoder
+    val passwordEncoder: PasswordEncoder,
+    val refreshTokenRepository: RefreshTokenDAO,
+    val confirmationUtilisateurRepository: ConfirmationUtilisateurDAO,
+    val resetMdpRepository: ResetMdpDAO,
 ){
     fun toDTO(utilisateur: Utilisateur): UtilisateurDTO{
         val dto = UtilisateurDTO(id = utilisateur.id,username = utilisateur.username,email = utilisateur.email,role = utilisateur.role,estBanned = utilisateur.estBanned, recettes = utilisateur.recettes, estActif = utilisateur.estActif, nouveauMotDePasse = null)
@@ -31,16 +38,26 @@ class UtilisateurService (
             entity.role = dto.role
             entity.estBanned = dto.estBanned
             entity.password = mdp
-            entity.estActif = dto.estActif
+            entity.estActif = if(dto.estActif == null) entity.estActif else dto.estActif
 
         }
         else{
             if (dto.nouveauMotDePasse == null) {
                 throw RuntimeException("Le nouveau mot de passe est requis")
             }
-            entity = Utilisateur(username = dto.username, email = dto.email, role = dto.role, estBanned = dto.estBanned, estActif = dto.estActif, recettes = mutableListOf(),password = passwordEncoder.encode(dto.nouveauMotDePasse!!))
+            entity = Utilisateur(username = dto.username, email = dto.email, role = dto.role, estBanned = dto.estBanned, estActif = false, recettes = mutableListOf(),password = passwordEncoder.encode(dto.nouveauMotDePasse!!))
         }
         return entity
 
+    }
+
+    @Transactional
+    fun supprimerUtilisateur(id: Long) {
+
+        refreshTokenRepository.deleteByUtilisateur_Id(id)
+        confirmationUtilisateurRepository.deleteByUtilisateur_Id(id)
+        resetMdpRepository.deleteByUtilisateur_Id(id)
+
+        utilisateurDAO.deleteById(id)
     }
 }

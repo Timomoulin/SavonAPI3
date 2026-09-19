@@ -92,7 +92,7 @@ class AdminUtilisateurController (
             return ResponseEntity.notFound().build()
         }
 
-        utilisateurDAO.deleteById(id)
+       utilisateurService.supprimerUtilisateur(id)
 
         return ResponseEntity.noContent().build()
     }
