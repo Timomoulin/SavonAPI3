@@ -11,20 +11,22 @@ put {
 }
 
 auth:bearer {
-  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc4OTc1ODg0MiwiZXhwIjoxNzg5NzU5NzQyfQ.2ojGZIXTzrnUZf4wVYKdz_ZKSSjE0SteIhI0QqnAzS0
+  token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG0iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc4OTgyNjMyOCwiZXhwIjoxNzg5ODI3MjI4fQ.HshMseOrYq5RoUltOfcX8dfARbCXuNg8GTQ76SVDmFI
 }
 
 body:json {
   {
-    "id":2,
-    "username": "user1Up",
-    "email": "user1up@mail.com",
+    "id": 2,
+    "username": "Ruetasilitu",
+    "email": "utilisateur@email.com",
+    "nouveauMotDePasse": null,
     "role": {
       "id": 2,
-      "nomLogic": "ROLE_USER",
-      "nom":"utilisateur"
+      "nom": "utilisateur",
+      "nomLogic": "ROLE_UTILISATEUR"
     },
     "estBanned": false,
-    "nouveauMotDePasse": "password123"
+    "estActif": false,
+    "recettes": null
   }
 }
