@@ -10,5 +10,6 @@ interface RefreshTokenDAO : JpaRepository<RefreshToken, Long> {
 
 
     fun findByUtilisateur_Id(id: Long): List<RefreshToken>
+    fun deleteByUtilisateur_Id(id: Long)
 
 }
