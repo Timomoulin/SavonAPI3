@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SavonApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <module name="SavonAPI.main" />
+    <option name="PROGRAM_PARAMETERS" value="--spring.config.location=file:./config/application-dev.properties" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.ldv.savonapi.SavonApiApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
