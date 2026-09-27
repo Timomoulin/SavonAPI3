@@ -1,43 +1,77 @@
 package org.ldv.savonapi
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-//TODO Les Imports suivant sont à adapter selon votre projet
 import org.ldv.savonapi.model.dao.CaracteristiqueDAO
-import org.ldv.savonapi.model.dao.IngredientDAO
 import org.ldv.savonapi.model.entity.*
 import org.ldv.savonapi.model.id.*
-import org.ldv.savonapi.service.DataInitializer
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ActiveProfiles
 
 @SpringBootTest
+@ActiveProfiles("test")
 class RecetteTests(
-    @Autowired val dataInitializer: DataInitializer,
-    @Autowired val ingredientDAO: IngredientDAO,
     @Autowired val caracteristiqueDAO: CaracteristiqueDAO
 ) {
     private lateinit var savon: Recette
 
     @BeforeEach
     fun setup() {
-        dataInitializer.run()
-        //TODO : Vérifier les id des ingredients et caracteristiques dans le dataInitializer
-        val huileCoco = ingredientDAO.findById(1).get()
-        val huileOlive = ingredientDAO.findById(2).get()
 
-        val iode = caracteristiqueDAO.findById(1).get()
-        val ins = caracteristiqueDAO.findById(2).get()
-        val douceur = caracteristiqueDAO.findById(3).get()
-        val lavant = caracteristiqueDAO.findById(4).get()
-        val volMousse = caracteristiqueDAO.findById(5).get()
-        val tenueMousse = caracteristiqueDAO.findById(6).get()
-        val durete = caracteristiqueDAO.findById(7).get()
-        val solubilite = caracteristiqueDAO.findById(8).get()
-        val sechage = caracteristiqueDAO.findById(9).get()
+        /*
+         * Les ingrédients nécessaires aux tests sont créés directement ici.
+         * Les tests ne dépendent donc plus des données de démonstration
+         * du profil DEV ni des identifiants présents en base.
+         */
+        val huileCoco = Ingredient(
+            id = 1,
+            nom = "Coco",
+            iode = 9f,
+            ins = 248f,
+            sapo = 257f,
+            volMousse = 13.326f,
+            tenueMousse = 9.560f,
+            lavant = 14.462f,
+            douceur = 7.746f,
+            durete = 9.390f,
+            solubilite = 11.204f,
+            sechage = 11.880f,
+            estCorpsGras = true
+        )
 
-        // Initialisation du savon avec les données fournies
+        val huileOlive = Ingredient(
+            id = 2,
+            nom = "Olive",
+            iode = 78f,
+            ins = 111f,
+            sapo = 189f,
+            lavant = 10.192f,
+            volMousse = 9.838f,
+            tenueMousse = 9.152f,
+            douceur = 9.260f,
+            durete = 10.144f,
+            solubilite = 9.298f,
+            sechage = 10.194f,
+            estCorpsGras = true
+        )
+
+        /*
+         * Les caractéristiques sont des données structurelles de SavApp.
+         * Elles sont donc initialisées par DataInitializer, y compris
+         * avec le profil TEST.
+         */
+        val iode = caracteristiqueDAO.findById(1).orElseThrow()
+        val ins = caracteristiqueDAO.findById(2).orElseThrow()
+        val douceur = caracteristiqueDAO.findById(3).orElseThrow()
+        val lavant = caracteristiqueDAO.findById(4).orElseThrow()
+        val volMousse = caracteristiqueDAO.findById(5).orElseThrow()
+        val tenueMousse = caracteristiqueDAO.findById(6).orElseThrow()
+        val durete = caracteristiqueDAO.findById(7).orElseThrow()
+        val solubilite = caracteristiqueDAO.findById(8).orElseThrow()
+        val sechage = caracteristiqueDAO.findById(9).orElseThrow()
+
         savon = Recette(
             id = 1,
             titre = "Savon Hydratant Reduction",
@@ -78,31 +112,64 @@ class RecetteTests(
     @Test
     fun `test calculApportEau`() {
         savon.calculApportEau()
-        assertEquals(353.0833f, savon.apportEnEau, 0.001f, "L'apport en eau doit être calculé correctement")
+
+        assertEquals(
+            353.0833f,
+            savon.apportEnEau,
+            0.001f,
+            "L'apport en eau doit être calculé correctement"
+        )
     }
 
     @Test
     fun `test calculNonPondere`() {
         savon.calculNonPondere()
 
-        val iode = savon.resultats.find { it.caracteristique?.nom == "Iode" }?.score!!
-        val ins = savon.resultats.find { it.caracteristique?.nom == "Indice INS" }?.score!!
+        val iode = savon.resultats
+            .find { it.caracteristique?.nom == "Iode" }?.score!!
 
-        assertEquals(43.5f, iode, 0.1f, "Le score iode doit être correct")
-        assertEquals(179.5f, ins, 0.1f, "Le score INS doit être correct")
+        val ins = savon.resultats
+            .find { it.caracteristique?.nom == "Indice INS" }?.score!!
+
+        assertEquals(
+            43.5f,
+            iode,
+            0.1f,
+            "Le score iode doit être correct"
+        )
+
+        assertEquals(
+            179.5f,
+            ins,
+            0.1f,
+            "Le score INS doit être correct"
+        )
     }
 
     @Test
     fun `test calculPondere`() {
         savon.calculPondere()
 
-        val douceur = savon.resultats.find { it.caracteristique?.nom == "Douceur" }?.score!!
-        val lavant = savon.resultats.find { it.caracteristique?.nom == "Lavant" }?.score!!
-        val volMousse = savon.resultats.find { it.caracteristique!!.nom == "Volume de mousse" }?.score!!
-        val tenueMousse = savon.resultats.find { it.caracteristique!!.nom == "Tenue de mousse" }?.score!!
-        val durete = savon.resultats.find { it.caracteristique!!.nom == "Dureté" }?.score!!
-        val solubilite = savon.resultats.find { it.caracteristique!!.nom == "Solubilité" }?.score!!
-        val sechage = savon.resultats.find { it.caracteristique!!.nom == "Séchage" }?.score!!
+        val douceur = savon.resultats
+            .find { it.caracteristique?.nom == "Douceur" }?.score!!
+
+        val lavant = savon.resultats
+            .find { it.caracteristique?.nom == "Lavant" }?.score!!
+
+        val volMousse = savon.resultats
+            .find { it.caracteristique!!.nom == "Volume de mousse" }?.score!!
+
+        val tenueMousse = savon.resultats
+            .find { it.caracteristique!!.nom == "Tenue de mousse" }?.score!!
+
+        val durete = savon.resultats
+            .find { it.caracteristique!!.nom == "Dureté" }?.score!!
+
+        val solubilite = savon.resultats
+            .find { it.caracteristique!!.nom == "Solubilité" }?.score!!
+
+        val sechage = savon.resultats
+            .find { it.caracteristique!!.nom == "Séchage" }?.score!!
 
         assertEquals(9.138174f, douceur, 0.001f, "Le score douceur doit être correct")
         assertEquals(11.585531f, lavant, 0.001f, "Le score lavant doit être correct")
@@ -116,6 +183,12 @@ class RecetteTests(
     @Test
     fun `test calculQteAlcalin`() {
         savon.calculQteAlcalin()
-        assertEquals(504.40475f, savon.qteAlcalin, 0.001f, "La quantité d'alcalin doit être calculée correctement")
+
+        assertEquals(
+            504.40475f,
+            savon.qteAlcalin,
+            0.001f,
+            "La quantité d'alcalin doit être calculée correctement"
+        )
     }
 }
